@@ -1,0 +1,9 @@
+1. 에디터 -> startupasset 폴더 생성 후 모든 폴더 안에 집어넣기
+2. DLL폴더 생성 -> UnityRpg.dll 파일 넣기
+3. 새로운 씬 생성
+- GameManager Prefab 추가
+- SceneInstance 추가
+4. 입력 처리
+-InputManager 에 추가
+5. UI
+- 창 추가 시 : ClosableWnd Prefab 복사해서 사용
