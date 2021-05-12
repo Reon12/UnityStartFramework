@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MI_BattleAxe
-  m_Shader: {fileID: 4800000, guid: f5bf387e02717534d8b2a5a0f024cf58, type: 3}
+  m_Shader: {fileID: 4800000, guid: e8fef9d6695952d41af2fb80d35bd427, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -185,6 +185,10 @@ Material:
     - _CullMode: 2
     - _CullModeForward: 2
     - _Cutoff: 0.5
+    - _DMBlendColorPower01: 0
+    - _DMBlendColorPower02: 0
+    - _DMBlendColorPower03: 0
+    - _DMBlendColorPower04: 0
     - _DarkMode: 0
     - _DetailNormalMapScale: 1
     - _DiffusionProfileHash: 2.7317202
@@ -262,9 +266,11 @@ Material:
     - _SurfaceType: 0
     - _TransAmbient: 0.2
     - _TransDirect: 1
+    - _TransNormal: 0.5
     - _TransNormalDistortion: 0.1
     - _TransScattering: 2
     - _TransShadow: 0.9
+    - _TransStrength: 1
     - _Translucency: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -306,5 +312,6 @@ Material:
     - _LipNailColor: {r: 1, g: 1, b: 1, a: 0}
     - _PannerProperty: {r: 0.02, g: -0.02, b: 0, a: 0}
     - _PannerProperty1: {r: 0, g: 0, b: 0, a: 0}
+    - _SSSColor: {r: 1, g: 0.8184171, b: 0.7122642, a: 1}
     - _SSSColor1: {r: 1, g: 0.8184171, b: 0.7122642, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

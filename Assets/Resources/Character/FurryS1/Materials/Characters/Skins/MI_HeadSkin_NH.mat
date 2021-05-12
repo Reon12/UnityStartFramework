@@ -8,12 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MI_HeadSkin_NH
-  m_Shader: {fileID: 4800000, guid: 253869db2350ef74b8ded21df899e14b, type: 3}
+  m_Shader: {fileID: 4800000, guid: 34e22a54801ad5546bc8b3e0083d5b4e, type: 3}
   m_ShaderKeywords: _ADD_PRECOMPUTED_VELOCITY
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -172,10 +172,13 @@ Material:
     - _SurfaceType: 0
     - _TransAmbient: 0.2
     - _TransDirect: 1
+    - _TransNormal: 0.5
     - _TransNormalDistortion: 0.1
     - _TransScattering: 2
     - _TransShadow: 0.9
+    - _TransStrength: 1
     - _Translucency: 1
+    - _TransmissionShadow: 0.5
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentSortPriority: 0
