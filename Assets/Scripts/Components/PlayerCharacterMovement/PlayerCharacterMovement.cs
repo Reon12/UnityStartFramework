@@ -6,7 +6,10 @@ using UnityStartUpFramework.Enums;
 public sealed class PlayerCharacterMovement : MonoBehaviour
 {
 
-	[Header("최대 이동 속력")]
+	[Header("걷기 이동 속력")]
+	[SerializeField] private float _WalkSpeed = 3.0f;
+
+	[Header("달리기 이동 속력")]
 	[SerializeField] private float _MaxSpeed = 6.0f;
 
 	[Header("가속률")] [Range(10.0f, 10000.0f)]
@@ -89,7 +92,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	public bool isGrounded { get; private set; }
 
 	// 이동 가능 상태를 나타냅니다.
-	public bool isMovable => true; // 나중에 조건식 추
+	public bool isMovable => true; 
 		
 
 	// 점프 가능 상태를 나타냅니다.
@@ -147,7 +150,9 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 
 
 		// 속도를 계산합니다.
-		CalculateVelocity();
+		if (InputManager.GetAction("Dash", ActionEvent.Stay))
+			CalculateVelocity(_MaxSpeed);
+		else CalculateVelocity(_WalkSpeed);
 
 		// 중력을 계산합니다.
 		CalculateGravity();
@@ -160,13 +165,13 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	}
 
 	// 속도를 계산합니다.
-	private void CalculateVelocity()
+	private void CalculateVelocity(float speed)
 	{
 		// 입력 값을 연산합니다.
 		void CalculateInputVector()
 		{
-			_TargetVelocity.x = _InputVector.x * _MaxSpeed * Time.deltaTime;
-			_TargetVelocity.z = _InputVector.z * _MaxSpeed * Time.deltaTime;
+			_TargetVelocity.x = _InputVector.x * speed * Time.deltaTime;
+			_TargetVelocity.z = _InputVector.z * speed * Time.deltaTime;
 		}
 
 		// 가속률을 연산합니다
@@ -186,7 +191,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 
 			// 가속률을 연산시킵니다.
 			_Velocity = Vector3.MoveTowards(
-				_Velocity, currentVelocity, _MaxSpeed * 
+				_Velocity, currentVelocity, speed * 
 				(_OneSecAcceleration * 0.01f * Time.deltaTime) * Time.deltaTime) +
 				(_ImpulseVelocity * Time.deltaTime);
 
@@ -299,6 +304,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			// 캐릭터가 상승중이 아닐 경우
 			_Velocity.y <= 0.0f;
 
+		Debug.Log((characterController.center.y) + (characterController.skinWidth * 2.0f) - (characterController.radius));
 #if UNITY_EDITOR
 		Debug.DrawRay(
 			ray.origin,

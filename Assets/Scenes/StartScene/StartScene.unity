@@ -298,12 +298,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5520419874321377282, guid: bf4ee62a43998a349b0fc262844d2875,
-        type: 3}
-      propertyPath: m_PlayerableCharacterPrefab
-      value: 
-      objectReference: {fileID: -2837043739489994091, guid: 269ffa5981cac3545a260b971e8eaf80,
-        type: 3}
     - target: {fileID: 8703145489015196885, guid: bf4ee62a43998a349b0fc262844d2875,
         type: 3}
       propertyPath: m_Name
@@ -325,7 +319,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1185958026921326264, guid: ae3f0b961442402449614a83cb69f969,
         type: 3}
+      propertyPath: _ActionInput.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185958026921326264, guid: ae3f0b961442402449614a83cb69f969,
+        type: 3}
       propertyPath: _AxisInput.Array.data[1].useUnityInput
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185958026921326264, guid: ae3f0b961442402449614a83cb69f969,
+        type: 3}
+      propertyPath: _ActionInput.Array.data[1].actionName
+      value: Crouch
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185958026921326264, guid: ae3f0b961442402449614a83cb69f969,
+        type: 3}
+      propertyPath: _ActionInput.Array.data[1].key
+      value: 306
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185958026921326264, guid: ae3f0b961442402449614a83cb69f969,
+        type: 3}
+      propertyPath: _ActionInput.Array.data[1].game
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185958026921326264, guid: ae3f0b961442402449614a83cb69f969,
+        type: 3}
+      propertyPath: _ActionInput.Array.data[2].actionName
+      value: Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185958026921326264, guid: ae3f0b961442402449614a83cb69f969,
+        type: 3}
+      propertyPath: _ActionInput.Array.data[2].key
+      value: 304
+      objectReference: {fileID: 0}
+    - target: {fileID: 1185958026921326264, guid: ae3f0b961442402449614a83cb69f969,
+        type: 3}
+      propertyPath: _ActionInput.Array.data[2].game
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3773264859000598492, guid: ae3f0b961442402449614a83cb69f969,
