@@ -304,7 +304,6 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			// 캐릭터가 상승중이 아닐 경우
 			_Velocity.y <= 0.0f;
 
-		Debug.Log((characterController.center.y) + (characterController.skinWidth * 2.0f) - (characterController.radius));
 #if UNITY_EDITOR
 		Debug.DrawRay(
 			ray.origin,
