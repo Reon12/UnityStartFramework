@@ -168,7 +168,6 @@ MonoBehaviour:
   _OneSecAcceleration: 600
   _UseOrientRotationToMovement: 1
   _RotationYawSpeed: 720
-  _MaxJumpCount: 1
   _JumpVelocityY: 10
   _GravityScale: 1
   _MaxYVelocity: 10
@@ -294,32 +293,32 @@ PrefabInstance:
     - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
         type: 3}
       propertyPath: m_AABB.m_Center.x
-      value: -0.0004901588
+      value: -0.000490129
       objectReference: {fileID: 0}
     - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
         type: 3}
       propertyPath: m_AABB.m_Center.y
-      value: 0.86693525
+      value: 0.012849733
       objectReference: {fileID: 0}
     - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
         type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: -0.012849733
+      value: 0.86590785
       objectReference: {fileID: 0}
     - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
         type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.12741274
+      value: 0.12741277
       objectReference: {fileID: 0}
     - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
         type: 3}
       propertyPath: m_AABB.m_Extent.y
-      value: 0.30431962
+      value: 0.120294824
       objectReference: {fileID: 0}
     - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
         type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.120294824
+      value: 0.3053469
       objectReference: {fileID: 0}
     - target: {fileID: 5959760377989276280, guid: c8880f0d3c987cc48b6770e69cf63ba0,
         type: 3}

@@ -6,11 +6,8 @@ using UnityStartUpFramework.Enums;
 public sealed class PlayerCharacterMovement : MonoBehaviour
 {
 
-	[Header("걷기 이동 속력")]
-	[SerializeField] private float _WalkSpeed = 3.0f;
-
 	[Header("달리기 이동 속력")]
-	[SerializeField] private float _MaxSpeed = 6.0f;
+	[SerializeField] private float _MoveSpeed = 6.0f;
 
 	[Header("가속률")] [Range(10.0f, 10000.0f)]
 	[Tooltip("1 초에 걸쳐 최대 속력의 몇 퍼센트만큼 가속되도록 할 것인지를 결정합니다.")]
@@ -23,9 +20,6 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	[Header("Yaw 회전 속력")]
 	[Tooltip("이동하는 방향으로 회전시킵니다. (UseOrientRotationToMovement 속성을 사용할 때 적용됩니다.)")]
 	[SerializeField] private float _RotationYawSpeed = 720.0f;
-
-	[Header("최대 점프 카운트")] [Space(30.0f)]
-	[SerializeField] private int _MaxJumpCount = 2;
 
 	[Header("점프 힘")]
 	[SerializeField] private float _JumpVelocityY = 10.0f;
@@ -63,13 +57,6 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	// 점프키 입력 끝 상태를 나타냅니다.
 	private bool _IsJumpInputFinished = true;
 
-	// 남은 점프 카운트
-	/// - 0 이라면 점프할 수 없습니다.
-	private int _RemainJumpCount;
-
-	// 이전 땅 착지 상태를 나타냅니다.
-	private bool _PrevGroundedState;
-
 	#endregion
 
 	// 속도를 나타냅니다.
@@ -86,10 +73,10 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 		}
 	}
 
-
-
 	// 땅에 닿음 상태를 나타냅니다.
 	public bool isGrounded { get; private set; }
+
+	public bool isDashable { get; set; }
 
 	// 이동 가능 상태를 나타냅니다.
 	public bool isMovable => true; 
@@ -100,11 +87,13 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 		// 이동 가능 상태이며
 		isMovable
 
-		// 땅에 닿아있거나, 남은 점프 카운트가 0 보다 크고
-		&& (isGrounded || _RemainJumpCount > 0)
+		// 땅에 닿아있거나
+		&& (isGrounded)
 
 		// 점프 입력이 끝났을 경우 점프할 수 있도록 합니다.
 		&& _IsJumpInputFinished;
+
+	
 
 
 	// CharacterController 컴포넌트를 나타냅니다.
@@ -122,12 +111,36 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	{
 		_PlayerableCharacter = GetComponent<PlayerableCharacterBase>();
 		characterController = GetComponent<CharacterController>();
+		isDashable = true;
 	}
 
 	private void Update()
 	{
-		// 캐릭터를 회전시킵니다.
-		OrientRotationToMovement();
+        // 캐릭터를 회전시킵니다.
+        OrientRotationToMovement();
+
+
+		// 대쉬키가 눌려있지 않고 땅에 있다면
+		if (!InputManager.GetAction("Dash", ActionEvent.Stay) && isGrounded)
+			_MoveSpeed = 3.0f;
+
+		// 대쉬키가 눌려있고 땅에 있다면
+		if (InputManager.GetAction("Dash", ActionEvent.Stay) && isGrounded)
+		{
+			_MoveSpeed = 6.0f;
+			isDashable = true;
+		}
+
+		// 대쉬가 가능한상태이고
+		// 공중에 있을때는 대쉬가 불가능하게 합니다.
+		// 대쉬키가 눌려있고 땅에 있지 않다면
+		if (isDashable && !isGrounded && InputManager.GetAction("Dash", ActionEvent.Down))
+		{
+
+			isDashable = false;
+			Debug.Log("Up Call!");
+			_MoveSpeed = 3.0f;
+		}
 
 	}
 
@@ -151,8 +164,11 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 
 		// 속도를 계산합니다.
 		if (InputManager.GetAction("Dash", ActionEvent.Stay))
-			CalculateVelocity(_MaxSpeed);
-		else CalculateVelocity(_WalkSpeed);
+        {
+			CalculateVelocity();
+        }
+		else CalculateVelocity();
+
 
 		// 중력을 계산합니다.
 		CalculateGravity();
@@ -162,16 +178,18 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 
 		// 땅 착지 상태를 갱신합니다.
 		UpdateGroundedState();
+
 	}
 
 	// 속도를 계산합니다.
-	private void CalculateVelocity(float speed)
+	private void CalculateVelocity()
 	{
+
 		// 입력 값을 연산합니다.
 		void CalculateInputVector()
 		{
-			_TargetVelocity.x = _InputVector.x * speed * Time.deltaTime;
-			_TargetVelocity.z = _InputVector.z * speed * Time.deltaTime;
+			_TargetVelocity.x = _InputVector.x * _MoveSpeed * Time.deltaTime;
+			_TargetVelocity.z = _InputVector.z * _MoveSpeed * Time.deltaTime;
 		}
 
 		// 가속률을 연산합니다
@@ -190,8 +208,9 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			currentVelocity.y = _Velocity.y = 0.0f;
 
 			// 가속률을 연산시킵니다.
-			_Velocity = Vector3.MoveTowards(
-				_Velocity, currentVelocity, speed * 
+			_Velocity = isDashable ? Vector3.MoveTowards(_Velocity, currentVelocity, _MoveSpeed * (_OneSecAcceleration * 0.01f * Time.deltaTime) * Time.deltaTime) + (_ImpulseVelocity * Time.deltaTime) :
+				Vector3.MoveTowards(
+				_Velocity, currentVelocity, _MoveSpeed * 
 				(_OneSecAcceleration * 0.01f * Time.deltaTime) * Time.deltaTime) +
 				(_ImpulseVelocity * Time.deltaTime);
 
@@ -201,6 +220,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			// 연산된 속도에 Y 속력을 적용시킵니다.
 			_Velocity.y = currentVelocityY;
 		}
+
 
 		// 입력 값을 연산합니다.
 		CalculateInputVector();
@@ -263,21 +283,23 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 		// 점프 가능 상태일 경우
 		if (isJumpable)
 		{
-			// 남은 점프 카운트가 0 보다 클 경우, 1 감소시킵니다.
-			if (_RemainJumpCount > 0) --_RemainJumpCount;
-
 			// Y 이동 속력을 변경합니다.
 			_TargetVelocity.y = _JumpVelocityY * Time.deltaTime;
-
-			onJumpStarted?.Invoke(_RemainJumpCount);
 		}
-
 		// 점프키가 입력되었으므로, 점프 입력 상태로 설정합니다.
 		_IsJumpInputFinished = false;
 	}
+	
 	// 점프 입력을 끝냅니다.
-	private void FinishJumpInput() =>
+	private void FinishJumpInput()
+    {
 		_IsJumpInputFinished = true;
+    }
+
+	
+	// 점프 상태일 경우 대쉬 불가능
+	// 점프 이전에 대쉬를 하고 있었다면 점프 시 이동속도가 대쉬 속도로 적용
+	
 
 	// 땅에 닿음 상태를 갱신합니다.
 	private void UpdateGroundedState()
@@ -315,42 +337,19 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 		{
 			// 땅에 닿아있다면 Y 축 이동 속력을 0 으로 설정합니다.
 			_TargetVelocity.y = 0.0f;
+			
 		}
 
-		// 땅에 닿음 상태가 이전 상태와 다를 경우
-		if (_PrevGroundedState != isGrounded)
-		{
-			// 이전 상태가 땅에 닿아있음 상태일 경우
-			if (_PrevGroundedState)
+		else
+        {
+			
+			// 낙하 속도 증가
+			_TargetVelocity.y -= 0.0005f;
+			if (_TargetVelocity.y <= -1.0f)
 			{
-				// 남은 점프 카운트가 _MaxJumpCount 와 일치할 경우
-				// 지형에서 떨어지는 상태이므로 점프 카운트를 감소시키며, 점프 상태로 설정합니다.
-				if ((_RemainJumpCount == _MaxJumpCount) && isMovable)
-				{
-					// 점프 카운트 1 감소
-					--_RemainJumpCount;
-
-					// 하단으로 살짝 이동시킵니다.
-					_TargetVelocity.y += Time.deltaTime;
-
-					// 점프 시작 이벤트 발생
-					onJumpStarted?.Invoke(_RemainJumpCount);
-				}
-			}
-			// 이전 상태가 땅에 닿지 않음 상태일 경우
-			else
-			{
-				// 착지 이벤트 발생
-				onLanded?.Invoke(_RemainJumpCount);
-
-				// 남은 점프 카운트를 초기화합니다.
-				_RemainJumpCount = _MaxJumpCount;
-			}
-
-			// 상태를 갱신합니다.
-			_PrevGroundedState = isGrounded;
-		}
-
+				_TargetVelocity.y = -1.0f;
+            }
+        }
 
 	}
 
