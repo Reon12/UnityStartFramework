@@ -39,6 +39,9 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	[Header("Use SpringArm Component")]
 	[SerializeField] private SpringArm _SprintArm; // 새로 추가한 컴포넌트
 
+	[Header("Use Weapon")]
+	[SerializeField] private GameObject _Weapon;
+
 	#region Move
 	// 이동 입력 값을 나타냅니다.
 	private Vector3 _InputVector;
@@ -81,6 +84,8 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	// 이동 가능 상태를 나타냅니다.
 	public bool isMovable => true; 
 		
+	// 무기 존재 여부를 나타냅니다.
+	public bool useWeapon { get; private set; }
 
 	// 점프 가능 상태를 나타냅니다.
 	public bool isJumpable =>
@@ -111,7 +116,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	{
 		_PlayerableCharacter = GetComponent<PlayerableCharacterBase>();
 		characterController = GetComponent<CharacterController>();
-		isDashable = true;
+		isDashable = false;
 	}
 
 	private void Update()
@@ -119,28 +124,8 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
         // 캐릭터를 회전시킵니다.
         OrientRotationToMovement();
 
-
-		// 대쉬키가 눌려있지 않고 땅에 있다면
-		if (!InputManager.GetAction("Dash", ActionEvent.Stay) && isGrounded)
-			_MoveSpeed = 3.0f;
-
-		// 대쉬키가 눌려있고 땅에 있다면
-		if (InputManager.GetAction("Dash", ActionEvent.Stay) && isGrounded)
-		{
-			_MoveSpeed = 6.0f;
-			isDashable = true;
-		}
-
-		// 대쉬가 가능한상태이고
-		// 공중에 있을때는 대쉬가 불가능하게 합니다.
-		// 대쉬키가 눌려있고 땅에 있지 않다면
-		if (isDashable && !isGrounded && InputManager.GetAction("Dash", ActionEvent.Down))
-		{
-
-			isDashable = false;
-			Debug.Log("Up Call!");
-			_MoveSpeed = 3.0f;
-		}
+		// 대쉬키 입력을 확인합니다.
+		DashInput();
 
 	}
 
@@ -296,9 +281,28 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 		_IsJumpInputFinished = true;
     }
 
+	// 대쉬키 입력 확인 메서드
+	private void DashInput()
+    {
+		// 대쉬키가 눌려있지 않고 땅에 있다면
+		if (!InputManager.GetAction("Dash", ActionEvent.Stay) && isGrounded)
+			_MoveSpeed = 3.0f;
+
+		// 대쉬키가 눌려있고 땅에 있다면
+		else if (InputManager.GetAction("Dash", ActionEvent.Stay) && isGrounded)
+		{
+			_MoveSpeed = 6.0f;
+			isDashable = true;
+		}
+
+		// 땅에있지 않고 대쉬키가 눌렸다면
+		else if (!isGrounded && InputManager.GetAction("Dash", ActionEvent.Down))
+		{
+			isDashable = false;
+			_MoveSpeed = 3.0f;
+		}
+	}
 	
-	// 점프 상태일 경우 대쉬 불가능
-	// 점프 이전에 대쉬를 하고 있었다면 점프 시 이동속도가 대쉬 속도로 적용
 	
 
 	// 땅에 닿음 상태를 갱신합니다.
@@ -332,7 +336,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			ray.direction * (characterController.center.y + (characterController.skinWidth)),
 			Color.red);
 #endif
-
+		
 		if (isGrounded)
 		{
 			// 땅에 닿아있다면 Y 축 이동 속력을 0 으로 설정합니다.
@@ -340,10 +344,10 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			
 		}
 
-		else
+		else if(!isGrounded)
         {
 			
-			// 낙하 속도 증가
+			// 땅에 닿아있지 않다면 낙하 속도 증가
 			_TargetVelocity.y -= 0.0005f;
 			if (_TargetVelocity.y <= -1.0f)
 			{

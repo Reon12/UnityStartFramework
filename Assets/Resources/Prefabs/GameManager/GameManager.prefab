@@ -149,6 +149,10 @@ MonoBehaviour:
     key: 304
     game: 1
     ui: 0
+  - actionName: NormalComboAttack
+    key: 323
+    game: 1
+    ui: 0
   _AxisInput:
   - axisName: Horizontal
     lowKey: 97

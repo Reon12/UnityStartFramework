@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityStartUpFramework.Enums;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerCharacterMovement))]
 
@@ -11,6 +11,7 @@ public class PlayerCharacterBase : PlayerableCharacterBase
     public CharacterController characterController { get; private set; }
     public PlayerCharacterMovement movement { get; private set; }
 
+    public PlayerSkillController skillController { get; private set; }
     public SpringArm springArm => _SpringArm;
 
     protected virtual void Awake()

@@ -20,12 +20,12 @@ PrefabInstance:
     - target: {fileID: 2412999461539928578, guid: f59513270b985824c973ef05b6b08881,
         type: 3}
       propertyPath: m_AABB.m_Center.z
-      value: -0.012849987
+      value: -0.012849733
       objectReference: {fileID: 0}
     - target: {fileID: 2412999461539928578, guid: f59513270b985824c973ef05b6b08881,
         type: 3}
       propertyPath: m_AABB.m_Extent.x
-      value: 0.12741277
+      value: 0.12741274
       objectReference: {fileID: 0}
     - target: {fileID: 2412999461539928578, guid: f59513270b985824c973ef05b6b08881,
         type: 3}
@@ -35,7 +35,7 @@ PrefabInstance:
     - target: {fileID: 2412999461539928578, guid: f59513270b985824c973ef05b6b08881,
         type: 3}
       propertyPath: m_AABB.m_Extent.z
-      value: 0.12029481
+      value: 0.120294824
       objectReference: {fileID: 0}
     - target: {fileID: 5096810711834980772, guid: f59513270b985824c973ef05b6b08881,
         type: 3}

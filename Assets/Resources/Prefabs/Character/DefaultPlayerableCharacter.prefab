@@ -163,8 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 727a0ba210a9d2a4db8f0b455ae98d35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WalkSpeed: 3
-  _MaxSpeed: 6
+  _MoveSpeed: 6
   _OneSecAcceleration: 600
   _UseOrientRotationToMovement: 1
   _RotationYawSpeed: 720
@@ -175,6 +174,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   _SprintArm: {fileID: 7134764722283386940}
+  _Weapon: {fileID: 1236738966578827711}
 --- !u!143 &2716074158682558109
 CharacterController:
   m_ObjectHideFlags: 0
@@ -290,35 +290,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5997788348244957881}
     m_Modifications:
-    - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
+    - target: {fileID: 2419769366082632452, guid: c8880f0d3c987cc48b6770e69cf63ba0,
         type: 3}
-      propertyPath: m_AABB.m_Center.x
-      value: -0.000490129
-      objectReference: {fileID: 0}
-    - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
-        type: 3}
-      propertyPath: m_AABB.m_Center.y
-      value: 0.012849733
-      objectReference: {fileID: 0}
-    - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
-        type: 3}
-      propertyPath: m_AABB.m_Center.z
-      value: 0.86590785
-      objectReference: {fileID: 0}
-    - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.x
-      value: 0.12741277
-      objectReference: {fileID: 0}
-    - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.y
-      value: 0.120294824
-      objectReference: {fileID: 0}
-    - target: {fileID: 2412999461539928578, guid: c8880f0d3c987cc48b6770e69cf63ba0,
-        type: 3}
-      propertyPath: m_AABB.m_Extent.z
-      value: 0.3053469
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5959760377989276280, guid: c8880f0d3c987cc48b6770e69cf63ba0,
         type: 3}
@@ -391,6 +366,12 @@ Transform:
 --- !u!95 &7409740217525120599 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6226745021725934828, guid: c8880f0d3c987cc48b6770e69cf63ba0,
+    type: 3}
+  m_PrefabInstance: {fileID: 3512096202406144699}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1236738966578827711 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2419769366082632452, guid: c8880f0d3c987cc48b6770e69cf63ba0,
     type: 3}
   m_PrefabInstance: {fileID: 3512096202406144699}
   m_PrefabAsset: {fileID: 0}
