@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class SkillRangeInfo : MonoBehaviour
 {
     // SphereCast 사용 여부를 나타냅니다.

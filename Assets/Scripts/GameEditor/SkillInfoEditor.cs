@@ -8,7 +8,7 @@ public class SkillInfoEditor : MonoBehaviour
 
     private void OnDestroy()
     {
-        foreach (var skillInfo in _SkillInfos)
+       foreach (var skillInfo in _SkillInfos)
             ResourceManager.Instance.SaveJson(skillInfo, "SkillInfos", $"{skillInfo.skillCode}.json");
     }
 }

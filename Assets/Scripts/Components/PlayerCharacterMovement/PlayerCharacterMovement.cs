@@ -82,10 +82,10 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	public bool isDashable { get; set; }
 
 	// 이동 가능 상태를 나타냅니다.
-	public bool isMovable => true; 
-		
-	// 무기 존재 여부를 나타냅니다.
-	public bool useWeapon { get; private set; }
+	public bool isMovable => true;
+
+	// 무기 사용 여부를 나타냅니다.
+	public bool useWeapon { get; private set; } = true;
 
 	// 점프 가능 상태를 나타냅니다.
 	public bool isJumpable =>
@@ -117,6 +117,8 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 		_PlayerableCharacter = GetComponent<PlayerableCharacterBase>();
 		characterController = GetComponent<CharacterController>();
 		isDashable = false;
+		UseWeaponInput(true);
+
 	}
 
 	private void Update()
@@ -153,6 +155,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			CalculateVelocity();
         }
 		else CalculateVelocity();
+
 
 
 		// 중력을 계산합니다.
@@ -302,9 +305,18 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			_MoveSpeed = 3.0f;
 		}
 	}
-	
-	
 
+	private void UseWeaponInput(bool isTrue)
+	{
+		
+		// 무기를 사용한다면
+		if (isTrue)
+        {
+			useWeapon = true;
+			// 무기 오브젝트 프리팹을 로드합니다.
+			ResourceManager.Instance.LoadResource<GameObject>("SK_BattleAxe", "Character/FurryS1/Prefabs/Characters/SK_BattleAxe").GetComponent<PlayerCharacterMovement>();
+        }
+	}
 	// 땅에 닿음 상태를 갱신합니다.
 	private void UpdateGroundedState()
 	{

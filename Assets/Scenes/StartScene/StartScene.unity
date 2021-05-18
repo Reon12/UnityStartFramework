@@ -347,7 +347,8 @@ MonoBehaviour:
     - NormalComboAttack1
     - NormalComboAttack2
     - NormalComboAttack3
-    skillRangeInfos: []
+    skillRangeInfos:
+    - {fileID: 0}
 --- !u!4 &929046418
 Transform:
   m_ObjectHideFlags: 0

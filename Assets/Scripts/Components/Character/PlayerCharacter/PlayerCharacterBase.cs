@@ -14,11 +14,13 @@ public class PlayerCharacterBase : PlayerableCharacterBase
     public PlayerSkillController skillController { get; private set; }
     public SpringArm springArm => _SpringArm;
 
+    public PlayerCharacterAnimController animController { get; private set; }
     protected virtual void Awake()
     {
         characterController = GetComponent<CharacterController>();
         movement = GetComponent<PlayerCharacterMovement>();
-
+        animController = GetComponent<PlayerCharacterAnimController>();
+        skillController = GetComponent<PlayerSkillController>();
         idCollider = characterController;
     }
     protected override void Update()

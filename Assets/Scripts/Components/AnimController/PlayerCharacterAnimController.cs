@@ -18,8 +18,8 @@ public class PlayerCharacterAnimController : AnimController
 
         SetParam("_VelocityLength", _PlayerableCharacter.movement.moveXZVelocity.magnitude);
         SetParam("_IsInAir", !_PlayerableCharacter.movement.isGrounded);
-        // 캐릭터가 달리고 있다면 무기를 집어넣습니다.
-
+        SetParam("_UseWeapon", _PlayerableCharacter.movement.useWeapon);
+        Debug.Log("_PlayerableCharacter.movement.useWeapon = " + _PlayerableCharacter.movement.useWeapon);
     }
     
 }
