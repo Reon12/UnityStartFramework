@@ -34,7 +34,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	[SerializeField] private LayerMask _IgnoreGroundLayers;
 
 	// 캐릭터 컴포넌트를 나타냅니다.
-	private PlayerableCharacterBase _PlayerableCharacter; // 기존 컴포넌트 = PlayerableCharacter
+	private PlayerCharacterBase _PlayerableCharacter; // 기존 컴포넌트 = PlayerableCharacter
 
 	[Header("Use SpringArm Component")]
 	[SerializeField] private SpringArm _SprintArm; // 새로 추가한 컴포넌트
@@ -82,7 +82,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 	public bool isDashable { get; set; }
 
 	// 이동 가능 상태를 나타냅니다.
-	public bool isMovable => true;
+	public bool isMovable => !_PlayerableCharacter.skillController.blockMovement;
 
 	// 무기 사용 여부를 나타냅니다.
 	public bool useWeapon { get; private set; } = true;
@@ -114,10 +114,9 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 
 	private void Awake()
 	{
-		_PlayerableCharacter = GetComponent<PlayerableCharacterBase>();
+		_PlayerableCharacter = GetComponent<PlayerCharacterBase>();
 		characterController = GetComponent<CharacterController>();
 		isDashable = false;
-		UseWeaponInput(true);
 
 	}
 
@@ -141,7 +140,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 		_InputVector.Normalize();
 
 		// 이동 입력 값을 카메라 방향으로 변환합니다.
-		_InputVector = _SprintArm.InputToCameraDirection(_InputVector); // 기존에 _PlayerableCharacter.springArm 였음
+		_InputVector = _PlayerableCharacter.springArm.InputToCameraDirection(_InputVector); // 기존에 _PlayerableCharacter.springArm 였음
 
 		// 점프 입력 처리를 합니다.
 		if (InputManager.GetAction("Jump", ActionEvent.Stay))

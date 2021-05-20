@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityStartUpFramework.Enums;
+
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerCharacterMovement))]
 
@@ -12,6 +13,7 @@ public class PlayerCharacterBase : PlayerableCharacterBase
     public PlayerCharacterMovement movement { get; private set; }
 
     public PlayerSkillController skillController { get; private set; }
+
     public SpringArm springArm => _SpringArm;
 
     public PlayerCharacterAnimController animController { get; private set; }
@@ -30,5 +32,9 @@ public class PlayerCharacterBase : PlayerableCharacterBase
         playerController.AddPitchAngle(-InputManager.GetAxis("Mouse Y"));
         springArm.ZoomCamera(-InputManager.GetAxis("Mouse ScrollWheel"));
 
+        if (InputManager.GetAction("NormalComboAttack", ActionEvent.Down))
+            skillController.RequestSkill("1000");
+        if (InputManager.GetAction("SpinAxeAttack", ActionEvent.Down))
+            skillController.RequestSkill("1001");
     }
 }

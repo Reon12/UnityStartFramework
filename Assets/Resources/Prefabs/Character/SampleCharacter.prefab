@@ -3224,7 +3224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7272763248257618027}
   - component: {fileID: 6226745021725934828}
-  - component: {fileID: -5954384481212488470}
+  - component: {fileID: 3983800542032345739}
   m_Layer: 0
   m_Name: SampleCharacter
   m_TagString: Player
@@ -3268,7 +3268,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-5954384481212488470
+--- !u!114 &3983800542032345739
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6844,6 +6844,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SK_BattleAxe
+      objectReference: {fileID: 0}
+    - target: {fileID: 1768589836585830088, guid: 833d0cf12219de4498aa784b162b0eb7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3373216800841299163, guid: 833d0cf12219de4498aa784b162b0eb7,
         type: 3}

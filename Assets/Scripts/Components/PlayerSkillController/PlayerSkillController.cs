@@ -8,7 +8,6 @@ public class PlayerSkillController : MonoBehaviour
 
     private PlayerCharacterBase _PlayerableCharacter;
 
-    private CharacterController _CharacterController;
     // 현재 실행중인 스킬 정보를 나타냅니다.
     private SkillInfo? _CurrentSkillInfo;
 
@@ -19,7 +18,7 @@ public class PlayerSkillController : MonoBehaviour
     private Queue<SkillInfo> _SkillQueue = new Queue<SkillInfo>();
 
     // 스킬 큐 최대 요소 개수
-    private int _MaxQueueCount = 1;
+    private int _MaxQueueCount = 2;
 
     private Dictionary<string, SkillProgressInfo> _UsedSkillInfo = new Dictionary<string, SkillProgressInfo>();
 
@@ -29,12 +28,11 @@ public class PlayerSkillController : MonoBehaviour
     private void Awake()
     {
         _PlayerableCharacter = GetComponent<PlayerCharacterBase>();
-        _CharacterController = GetComponent<CharacterController>();
     }
 
     private void Update()
     {
-      
+        SkillProcedure();
     }
     private void SkillProcedure()
     {
@@ -58,7 +56,8 @@ public class PlayerSkillController : MonoBehaviour
     {
         if (_PrevSkillInfo != null)
         {
-            if (_PrevSkillInfo.Value.skillCode == newskillinfo.skillCode)
+            // 사용하던 스킬이 전에 사용한 스킬과 코드가 동일하지 않다면
+            if (_PrevSkillInfo.Value.skillCode != newskillinfo.skillCode)
             {
                 SkillProgressInfo skillProgressInfo = _UsedSkillInfo[_PrevSkillInfo.Value.skillCode];
 
@@ -70,6 +69,7 @@ public class PlayerSkillController : MonoBehaviour
 
         if (_UsedSkillInfo.ContainsKey(newskillinfo.skillCode))
         {
+
             // 콤보를 사용하는 스킬이라면
             if (newskillinfo.maxComboCount != 0)
             {
@@ -88,8 +88,7 @@ public class PlayerSkillController : MonoBehaviour
         // 스킬을 처음 사용한다면
         else
         {
-            SkillProgressInfo newSkillProgressInfo = new SkillProgressInfo(newskillinfo.skillCode, 0);
-
+            SkillProgressInfo newSkillProgressInfo = new SkillProgressInfo(newskillinfo.skillCode,  0);
             _UsedSkillInfo.Add(newskillinfo.skillCode, newSkillProgressInfo);
         }
     }
@@ -102,8 +101,10 @@ public class PlayerSkillController : MonoBehaviour
         // 시전시킬 스킬이 이동을 제한하는지 확인합니다.
         blockMovement = !_CurrentSkillInfo.Value.moveableInSkillCastTime;
 
+
         // 스킬 실행 후 스킬 요청이 이루어질수 없게 합니다.
         isRequestable = false;
+
 
         // 전에 사용한 스킬이 존재한다면
         if (_PrevSkillInfo != null)
@@ -122,7 +123,7 @@ public class PlayerSkillController : MonoBehaviour
                 return;
             }
         }
-
+        _PlayerableCharacter.animController.controlledAnimator?.Play(_CurrentSkillInfo.Value.LinkableSkillanimationName[0]);
     }
     // 스킬 실행을 요청합니다.
     public void RequestSkill(string skillCode)
@@ -139,7 +140,7 @@ public class PlayerSkillController : MonoBehaviour
         SkillInfo requestSkillInfo =
             ResourceManager.Instance.LoadJson<SkillInfo>("SkillInfos", $"{skillCode}.json", out fileNotFound);
 
-        if (!fileNotFound)
+        if (fileNotFound)
         {
             Debug.LogError($"SkillCode = {skillCode} is Not Found!");
             return;
@@ -147,13 +148,17 @@ public class PlayerSkillController : MonoBehaviour
 
         if (!requestSkillInfo.castableInAir && !_PlayerableCharacter.movement.isGrounded) return;
 
+
         _SkillQueue.Enqueue(requestSkillInfo);
+
+
     }
     // 스킬이 끝났음을 알립니다.
     public void FinishedSkill()
     {
         // 처음 사용한 스킬을 저장합니다.
         _PrevSkillInfo = _CurrentSkillInfo;
+        _CurrentSkillInfo = null;
 
         // 스킬 요청 가능상태로 변경합니다.
         isRequestable = true;
@@ -161,9 +166,12 @@ public class PlayerSkillController : MonoBehaviour
         // 이동 제한을 해제합니다.
         blockMovement = false;
 
+
+        _PlayerableCharacter.animController.controlledAnimator?.CrossFade("BT_MoveGround", 0.25f);
         // 사용할 스킬이 존재하지 않다면
         if (_SkillQueue.Count == 0)
         {
+
             // 사용했던 스킬 콤보를 연계 시작 가능한 상태로 설정합니다.
             SkillProgressInfo skillProgressInfo = _UsedSkillInfo[_PrevSkillInfo.Value.skillCode];
             skillProgressInfo.skillCombo = -1;

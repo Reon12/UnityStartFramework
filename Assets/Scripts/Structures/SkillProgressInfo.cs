@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillProgressInfo : MonoBehaviour
+public struct SkillProgressInfo
 {
     public string progressSkillCode;
 

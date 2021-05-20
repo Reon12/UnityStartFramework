@@ -153,6 +153,10 @@ MonoBehaviour:
     key: 323
     game: 1
     ui: 0
+  - actionName: AxeSpin
+    key: 324
+    game: 1
+    ui: 0
   _AxisInput:
   - axisName: Horizontal
     lowKey: 97

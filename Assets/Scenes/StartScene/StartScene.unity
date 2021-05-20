@@ -348,7 +348,31 @@ MonoBehaviour:
     - NormalComboAttack2
     - NormalComboAttack3
     skillRangeInfos:
-    - {fileID: 0}
+    - useSphereCast: 1
+      castStartOffset: {x: 0, y: 0, z: 0}
+      castDirection: {x: 0, y: 0, z: 0}
+      castDistance: 0
+      castRadiust: 0
+      skillCalcFormula: 
+      createDelay: 0
+  - skillCode: 1001
+    skillName: SpinAxeAttack
+    sillDescription: RightClickToAttack
+    skillIconImagePath: 
+    useCoolTime: 0
+    coolTime: 0
+    moveableInSkillCastTime: 0
+    castableInAir: 0
+    LinkableSkillanimationName:
+    - SpinAxeAttack1
+    skillRangeInfos:
+    - useSphereCast: 1
+      castStartOffset: {x: 0, y: 0, z: 0}
+      castDirection: {x: 0, y: 0, z: 0}
+      castDistance: 0
+      castRadiust: 0
+      skillCalcFormula: 
+      createDelay: 0
 --- !u!4 &929046418
 Transform:
   m_ObjectHideFlags: 0

@@ -19,7 +19,6 @@ public class PlayerCharacterAnimController : AnimController
         SetParam("_VelocityLength", _PlayerableCharacter.movement.moveXZVelocity.magnitude);
         SetParam("_IsInAir", !_PlayerableCharacter.movement.isGrounded);
         SetParam("_UseWeapon", _PlayerableCharacter.movement.useWeapon);
-        Debug.Log("_PlayerableCharacter.movement.useWeapon = " + _PlayerableCharacter.movement.useWeapon);
     }
     
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class SkillRangeInfo : MonoBehaviour
+public struct SkillRangeInfo
 {
     // SphereCast 사용 여부를 나타냅니다.
     public bool useSphereCast;
@@ -25,6 +25,7 @@ public class SkillRangeInfo : MonoBehaviour
     public string skillCalcFormula;
 
     // 여러 영역 생성 시 영역 생성 딜레이
+    public float createDelay;
 
     public (int rangeCount, float value) GetSkillCalcFormulaResult()
     {

@@ -60236,14 +60236,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6333333
+  - time: 0.6
     functionName: AnimEvent_BlockSkillRequestable
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.76666665
+  - time: 0.73333335
     functionName: AnimEvent_SkillFinished
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 7af5b1901a882fa45946fb689c285ddb,

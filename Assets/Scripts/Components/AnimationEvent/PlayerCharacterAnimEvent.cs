@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCharacterAnimEvent : MonoBehaviour
+public sealed class PlayerCharacterAnimEvent : MonoBehaviour
 {
     private PlayerCharacterBase _PlayerCharacter;
 
-    private void Awake()
+    private void Start()
     {
         _PlayerCharacter = PlayerManager.Instance.playerController.playerableCharacter as PlayerCharacterBase;
     }
