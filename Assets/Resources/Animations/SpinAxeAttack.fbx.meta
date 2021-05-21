@@ -5,7 +5,13 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: SpinAxeAttack1
+    second: SpinAxeAttack2
+  - first:
+      74: -998496362607748373
+    second: Take 001
+  - first:
+      74: -5405653242291790180
+    second: Take 001 (1)
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -42,11 +48,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: SpinAxeAttack1
+      name: SpinAxeAttack2
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 60
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0

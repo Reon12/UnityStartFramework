@@ -18,7 +18,7 @@ public class PlayerSkillController : MonoBehaviour
     private Queue<SkillInfo> _SkillQueue = new Queue<SkillInfo>();
 
     // 스킬 큐 최대 요소 개수
-    private int _MaxQueueCount = 2;
+    private int _MaxQueueCount = 1;
 
     private Dictionary<string, SkillProgressInfo> _UsedSkillInfo = new Dictionary<string, SkillProgressInfo>();
 
@@ -32,7 +32,9 @@ public class PlayerSkillController : MonoBehaviour
 
     private void Update()
     {
+
         SkillProcedure();
+
     }
     private void SkillProcedure()
     {
@@ -69,7 +71,6 @@ public class PlayerSkillController : MonoBehaviour
 
         if (_UsedSkillInfo.ContainsKey(newskillinfo.skillCode))
         {
-
             // 콤보를 사용하는 스킬이라면
             if (newskillinfo.maxComboCount != 0)
             {
@@ -100,11 +101,9 @@ public class PlayerSkillController : MonoBehaviour
 
         // 시전시킬 스킬이 이동을 제한하는지 확인합니다.
         blockMovement = !_CurrentSkillInfo.Value.moveableInSkillCastTime;
-
-
+        
         // 스킬 실행 후 스킬 요청이 이루어질수 없게 합니다.
         isRequestable = false;
-
 
         // 전에 사용한 스킬이 존재한다면
         if (_PrevSkillInfo != null)
@@ -113,6 +112,7 @@ public class PlayerSkillController : MonoBehaviour
             if ((_PrevSkillInfo.Value.skillCode == _CurrentSkillInfo.Value.skillCode) &&
                 _CurrentSkillInfo.Value.maxComboCount != 0)
             {
+                Debug.Log("Call!");
                 // 애니메이션 클립 이름을 얻습니다.
                 int currentComboCount = _UsedSkillInfo[_CurrentSkillInfo.Value.skillCode].skillCombo;
                 string animClip = _CurrentSkillInfo.Value.LinkableSkillanimationName[currentComboCount];
@@ -122,8 +122,20 @@ public class PlayerSkillController : MonoBehaviour
 
                 return;
             }
+
+
         }
-        _PlayerableCharacter.animController.controlledAnimator?.Play(_CurrentSkillInfo.Value.LinkableSkillanimationName[0]);
+        // 스킬 콤보를 사용하는 스킬이라면 
+        if (_CurrentSkillInfo.Value.maxComboCount != 0)
+        {
+            _PlayerableCharacter.animController.controlledAnimator?.Play(_CurrentSkillInfo.Value.LinkableSkillanimationName[0]);
+        }
+        else
+        {
+            _PlayerableCharacter.animController.controlledAnimator?.Play(_CurrentSkillInfo.Value.skillName);
+        }
+
+
     }
     // 스킬 실행을 요청합니다.
     public void RequestSkill(string skillCode)
@@ -136,6 +148,8 @@ public class PlayerSkillController : MonoBehaviour
 
         bool fileNotFound;
 
+        Debug.Log("Request!");
+
         // 요청한 스킬 정보를 얻습니다.
         SkillInfo requestSkillInfo =
             ResourceManager.Instance.LoadJson<SkillInfo>("SkillInfos", $"{skillCode}.json", out fileNotFound);
@@ -147,7 +161,6 @@ public class PlayerSkillController : MonoBehaviour
         }
 
         if (!requestSkillInfo.castableInAir && !_PlayerableCharacter.movement.isGrounded) return;
-
 
         _SkillQueue.Enqueue(requestSkillInfo);
 
@@ -166,18 +179,20 @@ public class PlayerSkillController : MonoBehaviour
         // 이동 제한을 해제합니다.
         blockMovement = false;
 
+        Debug.Log("Fin!");
 
-        _PlayerableCharacter.animController.controlledAnimator?.CrossFade("BT_MoveGround", 0.25f);
+        _PlayerableCharacter.animController.controlledAnimator?.CrossFade("BT_MoveGround_Weapon", 0.25f);
         // 사용할 스킬이 존재하지 않다면
         if (_SkillQueue.Count == 0)
         {
-
             // 사용했던 스킬 콤보를 연계 시작 가능한 상태로 설정합니다.
             SkillProgressInfo skillProgressInfo = _UsedSkillInfo[_PrevSkillInfo.Value.skillCode];
             skillProgressInfo.skillCombo = -1;
             _UsedSkillInfo[_PrevSkillInfo.Value.skillCode] = skillProgressInfo;
         }
     }
+
+   
 
     // 스킬 범위 인덱스를 다음 인덱스로 설정합니다.
     public void NextSkillRangeIndex()

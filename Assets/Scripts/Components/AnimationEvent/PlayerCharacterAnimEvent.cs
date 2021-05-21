@@ -19,4 +19,10 @@ public sealed class PlayerCharacterAnimEvent : MonoBehaviour
 
     private void AnimEvent_BlockSkillRequestable() =>
         _PlayerCharacter.skillController.isRequestable = false;
+
+    private void AnimEvent_SkillMoveStarted() =>
+        _PlayerCharacter.skillController.blockMovement = false;
+
+    private void AnimEvent_SkillMoveFinished() =>
+        _PlayerCharacter.skillController.blockMovement = true;
 }

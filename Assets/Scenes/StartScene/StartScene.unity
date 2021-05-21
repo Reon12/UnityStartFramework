@@ -359,12 +359,11 @@ MonoBehaviour:
     skillName: SpinAxeAttack
     sillDescription: RightClickToAttack
     skillIconImagePath: 
-    useCoolTime: 0
-    coolTime: 0
+    useCoolTime: 1
+    coolTime: 2
     moveableInSkillCastTime: 0
     castableInAir: 0
-    LinkableSkillanimationName:
-    - SpinAxeAttack1
+    LinkableSkillanimationName: []
     skillRangeInfos:
     - useSphereCast: 1
       castStartOffset: {x: 0, y: 0, z: 0}

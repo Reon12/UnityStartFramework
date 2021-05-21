@@ -7,7 +7,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 {
 
 	[Header("달리기 이동 속력")]
-	[SerializeField] private float _MoveSpeed = 6.0f;
+	[SerializeField] public float _MoveSpeed = 6.0f;
 
 	[Header("가속률")] [Range(10.0f, 10000.0f)]
 	[Tooltip("1 초에 걸쳐 최대 속력의 몇 퍼센트만큼 가속되도록 할 것인지를 결정합니다.")]
@@ -41,6 +41,7 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 
 	[Header("Use Weapon")]
 	[SerializeField] private GameObject _Weapon;
+
 
 	#region Move
 	// 이동 입력 값을 나타냅니다.
@@ -97,8 +98,6 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 
 		// 점프 입력이 끝났을 경우 점프할 수 있도록 합니다.
 		&& _IsJumpInputFinished;
-
-	
 
 
 	// CharacterController 컴포넌트를 나타냅니다.
@@ -324,6 +323,10 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			transform.position + characterController.center,
 			Vector3.down);
 
+		Ray newRay = new Ray(
+			transform.position + characterController.center,
+			transform.forward);
+
 		// 땅에 닿아 있는지 확인합니다.
 		isGrounded =
 		// 캐릭터의 레이어가 아닌, 다른 오브젝트가 하단에 존재한다면
@@ -346,6 +349,11 @@ public sealed class PlayerCharacterMovement : MonoBehaviour
 			ray.origin,
 			ray.direction * (characterController.center.y + (characterController.skinWidth)),
 			Color.red);
+
+		Debug.DrawRay(
+			newRay.origin,
+			newRay.direction * (characterController.center.y + (characterController.skinWidth)),
+			Color.green);
 #endif
 		
 		if (isGrounded)
