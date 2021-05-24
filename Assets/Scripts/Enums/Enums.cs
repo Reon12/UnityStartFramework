@@ -10,6 +10,12 @@ public enum MessageBoxButton : byte
 	Cancel	=	0b0010
 }
 
+public enum SlotType
+{
+	InventoryItemSlot,
+	ShopItemSlot,
+	QuickSlot
+}
 
 
 
