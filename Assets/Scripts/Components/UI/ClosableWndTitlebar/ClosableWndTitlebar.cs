@@ -15,7 +15,7 @@ public sealed class ClosableWndTitlebar: MonoBehaviour, IDragHandler, IBeginDrag
 	[SerializeField] private Button _Button_Close;
 
 	// 이동시킬 ClosableWnd 를 나타냅니다.
-	private ClosableWndBase _ClosableWnd;
+	private ClosableWnd _ClosableWnd;
 
 	// 이전 입력 위치를 저장합니다.
 	private Vector2 _PrevInputPosition;
@@ -26,7 +26,7 @@ public sealed class ClosableWndTitlebar: MonoBehaviour, IDragHandler, IBeginDrag
 
 
 	private void Awake() =>
-		_ClosableWnd = transform.parent.GetComponent<ClosableWndBase>();
+		_ClosableWnd = transform.parent.GetComponent<ClosableWnd>();
 
 	// 드래깅이 시작되었을 때 호출되는 콜백
 	void IBeginDragHandler.OnBeginDrag(PointerEventData eventData) =>

@@ -19,14 +19,11 @@ public class BaseSlot :
 
     protected ScreenInstance m_ScreenInstance;
 
-    protected Button m_Button_Slot;
-
     protected string m_InCode;
 
     protected SlotType m_SlotType;
 
     public Image slotImage => _Image_Slot;
-
     public TextMeshProUGUI countText => _TMP_Count;
 
     // 드래그 드랍 사용 여부
@@ -44,17 +41,17 @@ public class BaseSlot :
     // 슬롯 우클릭 // 장비 장착 시 필요
     public event System.Action onSlotRightClicked;
 
-    protected static Texture2D m_T_NULL;
+    protected static Texture2D m_T_Null;
 
     private static SlotDragVisual SlotDragVisualPrefab;
 
 
     protected virtual void Awake()
     {
-        if (!m_T_NULL)
+        if (!m_T_Null)
         {
-            m_T_NULL = ResourceManager.Instance.LoadResource<Texture2D>(
-                "f", "Image/ItemImage/f");
+            m_T_Null = ResourceManager.Instance.LoadResource<Texture2D>(
+                "BgIcon", "RPG_MMO_GUI/Texture/Props/BgIcon");
         }
         if (!SlotDragVisualPrefab)
         {
@@ -63,7 +60,6 @@ public class BaseSlot :
         }
         m_ScreenInstance = PlayerManager.Instance.playerController.screenInstance;
 
-        m_Button_Slot = GetComponent<Button>();
 
     }
 

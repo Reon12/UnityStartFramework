@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClosableWnd : ClosableWndBase
 {
+	[SerializeField] private TextMeshProUGUI Text_TitleBar;
+	[SerializeField] private Button _Button_CloseWnd; 
 	private ClosableWndTitlebar _ClosableWndTitlebar;
 
 	public ClosableWndTitlebar closableWndTitlebar => _ClosableWndTitlebar;

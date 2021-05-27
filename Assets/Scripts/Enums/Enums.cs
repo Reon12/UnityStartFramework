@@ -13,6 +13,7 @@ public enum MessageBoxButton : byte
 public enum SlotType
 {
 	InventoryItemSlot,
+	EquipItemSlot,
 	ShopItemSlot,
 	QuickSlot
 }
