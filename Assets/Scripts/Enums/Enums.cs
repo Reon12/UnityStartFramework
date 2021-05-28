@@ -18,5 +18,17 @@ public enum SlotType
 	QuickSlot
 }
 
+public enum ItemType
+{
+	// 재료 
+	Material,
+
+	// 소비
+	Consumption,
+
+	// 장비
+	Equipment,
+
+}
 
 

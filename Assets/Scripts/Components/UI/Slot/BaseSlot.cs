@@ -30,13 +30,13 @@ public class BaseSlot :
     protected bool m_UseDragDrop = false;
 
     // 슬롯 드래그 시작
-    public event System.Action<DragDropOperation, SlotDragVisual> onDragStarted;
+    public event System.Action<DragDropOperation, SlotDragVisual> onSlotDragStarted;
 
     // 슬롯 드래그 취소
-    public event System.Action<DragDropOperation> onDragCancelled;
+    public event System.Action<DragDropOperation> onSlotDragCancelled;
 
     // 슬롯 드래그 끝
-    public event System.Action<DragDropOperation> onDragFinished;
+    public event System.Action<DragDropOperation> onSlotDragFinished;
 
     // 슬롯 우클릭 // 장비 장착 시 필요
     public event System.Action onSlotRightClicked;
@@ -60,7 +60,8 @@ public class BaseSlot :
         }
         m_ScreenInstance = PlayerManager.Instance.playerController.screenInstance;
 
-
+        // 빈 슬롯 기본값 설정
+        SetSlotItemCount(0);
     }
 
     // 슬롯 초기화 메서드
@@ -71,10 +72,9 @@ public class BaseSlot :
     }
 
 
-    // 슬롯 아이템의 카운트의 개수가 0이면 표시하지 않습니다.
-    public void SetItemCount()
-    {
-    }
+    // 슬롯에 표시되는 숫자를 설정합니다.
+    public void SetSlotItemCount(int itemCount, bool visibleLessThan2 = false) =>
+        _TMP_Count.text = (itemCount >= 2 || visibleLessThan2) ? itemCount.ToString() : "";
 
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
@@ -85,27 +85,66 @@ public class BaseSlot :
 
             m_ScreenInstance.StartDragDropOperation(new DragDropOperation(this, dragVisual.rectTransform));
 
-            onDragStarted?.Invoke(m_ScreenInstance.dragDropOperation, dragVisual);
+            onSlotDragStarted?.Invoke(m_ScreenInstance.dragDropOperation, dragVisual);
         }
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
+    
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
+        // 드래그 드랍을 사용하지 않는다면 실행하지 않습니다.
+        if (!m_UseDragDrop) return;
+
+        if (m_ScreenInstance.dragDropOperation.overlappedComponents.Count != 0)
+        {
+            // 드래그 끝을 알립니다.
+            onSlotDragFinished.Invoke(m_ScreenInstance.dragDropOperation);
+
+            // 겹친 슬롯의 onSlotDragFinished 이벤트를 발생시킵니다.
+            foreach (var component in m_ScreenInstance.dragDropOperation.overlappedComponents)
+            {
+                if (!(component is BaseSlot)) continue;
+                (component as BaseSlot).onSlotDragFinished.Invoke(m_ScreenInstance.dragDropOperation);
+            }
+        }
+        else
+        {
+            // 드래그 취소를 알립니다.
+            onSlotDragCancelled?.Invoke(m_ScreenInstance.dragDropOperation);
+        }
+
+        // 드래깅 작업을 끝냅니다.
+        m_ScreenInstance.FinishDragDropOperation();
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            // 슬롯 좌클릭 
+            onSlotRightClicked?.Invoke();
+        }
     }
 
     void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
     {
+        // 드래그 드랍을 사용하지 않는다면 실행하지 않습니다.
+        if (!m_UseDragDrop) return;
+
+        // 영역 겹칩
+        m_ScreenInstance.dragDropOperation?.OnPointerEnter(this);
     }
 
     void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
     {
+        // 드래그 드랍을 사용하지 않는다면 실행하지 않습니다.
+        if (!m_UseDragDrop) return;
+
+        // 영역 겹침 끝
+        m_ScreenInstance.dragDropOperation?.OnPointerExit(this);
     }
 }

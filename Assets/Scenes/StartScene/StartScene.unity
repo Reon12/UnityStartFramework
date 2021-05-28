@@ -121,6 +121,142 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &21889948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 21889950}
+  - component: {fileID: 21889949}
+  m_Layer: 0
+  m_Name: ItemEditor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &21889949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21889948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526f8c6e5a4974d4593e47dcef42d169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ItemInfos:
+  - itemCode: 90001
+    itemName: "\uC0AC\uACFC"
+    itemDescription: "\uB9DB\uC788\uAC8C \uC798 \uC775\uC740 \uC0AC\uACFC\uB2E4"
+    itemType: 1
+    itemImagePath: '"Image/ItemImage/apple"'
+    maxSlotItemCount: 10
+    priceToSilver: 50
+    priceToGold: 0
+    priceToDiamond: 0
+  - itemCode: 90002
+    itemName: "\uB2E8\uB2E8\uD55C \uAC11\uC637"
+    itemDescription: "\uC870\uAE08 \uBB34\uAC70\uC6CC\uBCF4\uC774\uC9C0\uB9CC \uB2E8\uB2E8\uD574\uC9C8\uAC70\uAC19\uB2E4"
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/armor"'
+    maxSlotItemCount: 1
+    priceToSilver: 100
+    priceToGold: 20
+    priceToDiamond: 0
+  - itemCode: 90003
+    itemName: "\uB3C4\uB07C"
+    itemDescription: "\uC774\uAC74 \uB098\uBB34\uCE90\uB294 \uB3C4\uB07C\uAC00 \uC544\uB2CC
+      \uBAAC\uC2A4\uD130\uC7A1\uB294 \uB3C4\uB07C\uB2E4"
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/axe"'
+    maxSlotItemCount: 1
+    priceToSilver: 200
+    priceToGold: 10
+    priceToDiamond: 0
+  - itemCode: 90004
+    itemName: "\uC7A5\uAC11"
+    itemDescription: "\uB450\uAECD\uC9C0\uB9CC \uAC00\uBCBC\uC6B4 \uC7A5\uAC11"
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/gloves"'
+    maxSlotItemCount: 1
+    priceToSilver: 50
+    priceToGold: 5
+    priceToDiamond: 10
+  - itemCode: 90005
+    itemName: "\uC2E0\uBC1C"
+    itemDescription: "\uB9E8\uBC1C\uB85C \uAC78\uC5B4\uB2E4\uB2D0\uC21C\uC5C6\uC9C0"
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/boots"'
+    maxSlotItemCount: 1
+    priceToSilver: 100
+    priceToGold: 20
+    priceToDiamond: 0
+  - itemCode: 90006
+    itemName: "\uBCA8\uD2B8"
+    itemDescription: "\uC878\uB77C\uB9E4\uB294 \uD5C8\uB9AC\uB048 \uBAB0\uC544\uCE58\uB294
+      \uD5C8\uB9AC\uCF00\uC778"
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/belts"'
+    maxSlotItemCount: 1
+    priceToSilver: 60
+    priceToGold: 0
+    priceToDiamond: 5
+  - itemCode: 90007
+    itemName: "\uBCF4\uC11D"
+    itemDescription: "\uC0C1\uC810\uC5D0 \uD314\uBA74 \uBE44\uC300\uAC70\uAC19\uB2E4"
+    itemType: 0
+    itemImagePath: '"Image/ItemImage/gem"'
+    maxSlotItemCount: 5
+    priceToSilver: 0
+    priceToGold: 0
+    priceToDiamond: 0
+  - itemCode: 90008
+    itemName: "\uD5EC\uBA67"
+    itemDescription: "\uBA38\uB9AC\uB97C \uBCF4\uD638\uD574\uC904\uAE4C?"
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/helmets"'
+    maxSlotItemCount: 1
+    priceToSilver: 100
+    priceToGold: 10
+    priceToDiamond: 5
+  - itemCode: 90009
+    itemName: "\uCCB4\uB825\uD3EC\uC158"
+    itemDescription: "\uB9C8\uC2DC\uBA74 \uCCB4\uB825\uC774 \uD68C\uBCF5\uB41C\uB2E4"
+    itemType: 1
+    itemImagePath: '"Image/ItemImage/hp"'
+    maxSlotItemCount: 50
+    priceToSilver: 20
+    priceToGold: 0
+    priceToDiamond: 0
+  - itemCode: 90010
+    itemName: "\uB9C8\uB098\uD3EC\uC158"
+    itemDescription: "\uB9C8\uC2DC\uBA74 \uB9C8\uB098\uAC00 \uD68C\uBCF5\uB41C\uB2E4"
+    itemType: 1
+    itemImagePath: '"Image/ItemImage/mp"'
+    maxSlotItemCount: 50
+    priceToSilver: 35
+    priceToGold: 0
+    priceToDiamond: 0
+--- !u!4 &21889950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21889948}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -13.276653, y: 16.323606, z: 99.04055}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &608832096
 GameObject:
   m_ObjectHideFlags: 0
