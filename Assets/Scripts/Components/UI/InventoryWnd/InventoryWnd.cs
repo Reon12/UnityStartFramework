@@ -22,7 +22,9 @@ public sealed class InventoryWnd : ClosableWnd
         base.Awake();
 
         _Panel_InventorySlotPrefab = ResourceManager.Instance.LoadResource<GameObject>("Panel_InventoryItemSlot",
-            "Prefabs/UI/Slot/Panel_InventoryItemSlot", true).GetComponent<InventorySlot>();
+            "Prefabs/UI/Slot/Panel_InventoryItemSlot").GetComponent<InventorySlot>();
+
+        InitializeInventoryWnd();
     }
 
     // 인벤토리 초기화
@@ -38,8 +40,10 @@ public sealed class InventoryWnd : ClosableWnd
 
             _ItemSlots.Add(newitemslot);
 
-            newitemslot.
+            newitemslot.InitializeInventoryItemSlot(SlotType.InventoryItemSlot, playerCharacterInfo.inventoryItemInfos[i].itemCode, i);
         }
+
+        onWndClosedEvent += () => m_ScreenInstance.FinishDragDropOperation(); 
     }
 
     // 인벤토리 슬롯 생성

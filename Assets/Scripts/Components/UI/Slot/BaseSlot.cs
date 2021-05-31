@@ -26,6 +26,7 @@ public class BaseSlot :
     public Image slotImage => _Image_Slot;
     public TextMeshProUGUI countText => _TMP_Count;
 
+    public SlotType slotType => m_SlotType;
     // 드래그 드랍 사용 여부
     protected bool m_UseDragDrop = false;
 
