@@ -18,6 +18,8 @@ public class GamePlayerController : PlayerController
     private void Update()
     {
         if (InputManager.GetAction("OpenInventory", UnityStartUpFramework.Enums.ActionEvent.Down))
+        {
             _PlayerInventory.ToggleInventory();
+        }
     }
 }

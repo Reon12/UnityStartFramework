@@ -9,25 +9,29 @@ public class InventorySlot : ItemSlot
 
     public int inventoryItemSlotIndex => _InventoryItemSlotIndex;
 
-    protected override void InitializeSlot(SlotType slotType, string inCode)
+    protected override void Awake()
     {
-        base.InitializeSlot(slotType, inCode);
-
+        base.Awake();
+        
         // 슬롯 타입 설정
         m_SlotType = SlotType.InventoryItemSlot;
 
         // 드래그 드랍 사용 여부
         m_UseDragDrop = true;
 
+        // 슬롯이 비어있다면 실행하지 않습니다.
         // 드래그 시작시 실행할 내용 정의
         onSlotDragStarted += (dragDropOperation, dragVisual) =>
         {
+
             // 슬롯이 비어있지 않다면 드래그 한 아이템 어둡게 표시
             if (!_ItemInfo.IsEmpty)
             {
                 Color slotImageColor = new Color(0.3f, 0.3f, 0.6f);
                 slotImage.color = slotImageColor;
             }
+            // 슬롯이 비어있다면 드래그 x
+            else m_UseDragDrop = false;
 
             // 드래그 비쥬얼 이미지를 슬롯 이미지로 설정
             dragVisual.SetDragImageFromSprite(slotImage.sprite);
@@ -52,7 +56,22 @@ public class InventorySlot : ItemSlot
                     // 슬롯 타입이 인벤토리 슬롯이라면
                     if (overlappedSlot.slotType == SlotType.InventoryItemSlot)
                     {
+                        InventorySlot inventorySlot = overlappedComponent as InventorySlot;
 
+                        // 아이템 슬롯이 비어있다면 스왑 x
+                        if (_ItemInfo.IsEmpty) continue;
+
+                        slotImage.color = new Color(1.0f, 1.0f, 1.0f);
+
+                        GamePlayerController playerController = (PlayerManager.Instance.playerController) as GamePlayerController;
+                        ref PlayerCharacterInfo playerCharacterInfo = ref playerController.playerCharacterInfo;
+
+                        bool isSameItem =
+                            playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] == playerCharacterInfo.inventoryItemInfos[inventoryItemSlotIndex];
+                        if (isSameItem)
+                        playerController.playerInventory.MergeItem(this, inventorySlot);
+                        else
+                        playerController.playerInventory.SwapItem(this, inventorySlot);
                     }
                 }
 

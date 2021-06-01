@@ -245,9 +245,9 @@ GameObject:
   - component: {fileID: 245437025621641881}
   - component: {fileID: 4888832837898478060}
   - component: {fileID: 2090695143445640275}
-  - component: {fileID: -6337307375986615153}
+  - component: {fileID: 6145784450350258220}
   m_Layer: 5
-  m_Name: Panel_BaseSlot
+  m_Name: Panel_ItemSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &-6337307375986615153
+--- !u!114 &6145784450350258220
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4962339170855369271}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc879226addd3eb4e86242d3ad49e5b7, type: 3}
+  m_Script: {fileID: 11500000, guid: f7e931d87058b12429a719b5081ba90f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _TMP_Count: {fileID: 7564996629632596719}

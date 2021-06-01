@@ -52,12 +52,12 @@ public class BaseSlot :
         if (!m_T_Null)
         {
             m_T_Null = ResourceManager.Instance.LoadResource<Texture2D>(
-                "BgIcon", "RPG_MMO_GUI/Texture/Props/BgIcon");
+                "T_Null", "Image/Slot/T_NULL");
         }
         if (!SlotDragVisualPrefab)
         {
-            SlotDragVisualPrefab = ResourceManager.Instance.LoadResource<SlotDragVisual>(
-                "SlotDragVisual", "Prefabs/UI/Slot/SlotDragVisual");
+            SlotDragVisualPrefab = ResourceManager.Instance.LoadResource<GameObject>(
+                "SlotDragVisual", "Prefabs/UI/Slot/SlotDragVisual").GetComponent<SlotDragVisual>();
         }
         m_ScreenInstance = PlayerManager.Instance.playerController.screenInstance;
 
@@ -80,6 +80,7 @@ public class BaseSlot :
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {
+
         if (m_UseDragDrop)
         {
             SlotDragVisual dragVisual = Instantiate(SlotDragVisualPrefab, m_ScreenInstance.rectTransform);
@@ -97,19 +98,20 @@ public class BaseSlot :
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
     {
+
         // 드래그 드랍을 사용하지 않는다면 실행하지 않습니다.
         if (!m_UseDragDrop) return;
 
         if (m_ScreenInstance.dragDropOperation.overlappedComponents.Count != 0)
         {
             // 드래그 끝을 알립니다.
-            onSlotDragFinished.Invoke(m_ScreenInstance.dragDropOperation);
+            onSlotDragFinished?.Invoke(m_ScreenInstance.dragDropOperation);
 
             // 겹친 슬롯의 onSlotDragFinished 이벤트를 발생시킵니다.
             foreach (var component in m_ScreenInstance.dragDropOperation.overlappedComponents)
             {
                 if (!(component is BaseSlot)) continue;
-                (component as BaseSlot).onSlotDragFinished.Invoke(m_ScreenInstance.dragDropOperation);
+                (component as BaseSlot).onSlotDragFinished?.Invoke(m_ScreenInstance.dragDropOperation);
             }
         }
         else
@@ -126,7 +128,7 @@ public class BaseSlot :
     {
         if (eventData.button == PointerEventData.InputButton.Right)
         {
-            // 슬롯 좌클릭 
+            // 슬롯 우클릭 
             onSlotRightClicked?.Invoke();
         }
     }

@@ -8,10 +8,11 @@ public class PlayerController : PlayerControllerBase
 
     public ref PlayerCharacterInfo playerCharacterInfo => ref _PlayerCharacterInfo;
 
+
+
     protected override void Awake()
     {
         base.Awake();
-
         _PlayerCharacterInfo.Initialize();
     }
 

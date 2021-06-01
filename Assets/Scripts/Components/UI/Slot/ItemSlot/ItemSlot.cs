@@ -14,6 +14,8 @@ public class ItemSlot : BaseSlot
         base.InitializeSlot(slotType, inCode);
 
         SetItemInfo(inCode);
+
+        UpdateItemImage();
     }
 
     
@@ -32,7 +34,6 @@ public class ItemSlot : BaseSlot
             bool fileNotFound;
             ItemInfo itemInfo =
                 ResourceManager.Instance.LoadJson<ItemInfo>("ItemInfos", $"{itemCode}.json", out fileNotFound);
-
             // 파일을 읽어 오지 못했다면
             if (fileNotFound)
             {

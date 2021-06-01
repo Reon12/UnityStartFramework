@@ -25,6 +25,9 @@ public sealed class InventoryWnd : ClosableWnd
             "Prefabs/UI/Slot/Panel_InventoryItemSlot").GetComponent<InventorySlot>();
 
         InitializeInventoryWnd();
+
+        UpdateCash();
+
     }
 
     // 인벤토리 초기화
@@ -46,6 +49,14 @@ public sealed class InventoryWnd : ClosableWnd
         onWndClosedEvent += () => m_ScreenInstance.FinishDragDropOperation(); 
     }
 
+    public void UpdateCash()
+    {
+        GamePlayerController gamePlayerController = PlayerManager.Instance.playerController as GamePlayerController;
+        _TMP_Silver.text = gamePlayerController.playerCharacterInfo.Silver.ToString();
+        _TMP_Gold.text = gamePlayerController.playerCharacterInfo.Gold.ToString();
+        _TMP_Diamond.text = gamePlayerController.playerCharacterInfo.Diamond.ToString();
+
+    }
     // 인벤토리 슬롯 생성
     private InventorySlot CreateSlot() =>
         Instantiate(_Panel_InventorySlotPrefab, _Panel_ItemSlots);

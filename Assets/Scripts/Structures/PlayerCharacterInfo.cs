@@ -11,6 +11,8 @@ public struct PlayerCharacterInfo
     // 소지중인 아이템 정보
     public List<ItemSlotInfo> inventoryItemInfos;
 
+    public ItemInfo itemInfos;
+
     // 소지금 (은화)
     public int Silver;
 
@@ -22,13 +24,24 @@ public struct PlayerCharacterInfo
 
     public void Initialize()
     {
-        InventorySlotCount = 24;
+        InventorySlotCount = 25;
 
         Silver = 5000;
 
         Gold = 500;
 
         Diamond = 200;
+        inventoryItemInfos = new List<ItemSlotInfo>();
+        for (int i = 0; i < InventorySlotCount; ++i)
+            inventoryItemInfos.Add(new ItemSlotInfo());
+
+        inventoryItemInfos[5] = new ItemSlotInfo("90003", 5, 0);
+        inventoryItemInfos[7] = new ItemSlotInfo("90002", 1, 0);
+        inventoryItemInfos[0] = new ItemSlotInfo("90001", 3, 0);
+        inventoryItemInfos[1] = new ItemSlotInfo("90001", 4, 0);
+        inventoryItemInfos[2] = new ItemSlotInfo("90001", 5, 0);
+        inventoryItemInfos[3] = new ItemSlotInfo("90001", 6, 0);
+        inventoryItemInfos[4] = new ItemSlotInfo("90001", 7, 0);
 
     }
 }

@@ -159,7 +159,7 @@ MonoBehaviour:
     ui: 0
   - actionName: OpenInventory
     key: 105
-    game: 0
+    game: 1
     ui: 1
   _AxisInput:
   - axisName: Horizontal
