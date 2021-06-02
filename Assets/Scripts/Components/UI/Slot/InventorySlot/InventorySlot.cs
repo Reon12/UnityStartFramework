@@ -19,7 +19,6 @@ public class InventorySlot : ItemSlot
         // 드래그 드랍 사용 여부
         m_UseDragDrop = true;
 
-        // 슬롯이 비어있다면 실행하지 않습니다.
         // 드래그 시작시 실행할 내용 정의
         onSlotDragStarted += (dragDropOperation, dragVisual) =>
         {
@@ -30,11 +29,10 @@ public class InventorySlot : ItemSlot
                 Color slotImageColor = new Color(0.3f, 0.3f, 0.6f);
                 slotImage.color = slotImageColor;
             }
-            // 슬롯이 비어있다면 드래그 x
-            else m_UseDragDrop = false;
 
             // 드래그 비쥬얼 이미지를 슬롯 이미지로 설정
             dragVisual.SetDragImageFromSprite(slotImage.sprite);
+            if (_ItemInfo.IsEmpty) return;
 
             // 드래그 취소
             dragDropOperation.onDragCancelled += () =>
@@ -50,7 +48,7 @@ public class InventorySlot : ItemSlot
                 foreach (var overlappedComponent in dragDropOperation.overlappedComponents)
                 {
                     BaseSlot overlappedSlot = overlappedComponent as BaseSlot;
-
+                    Debug.Log(overlappedSlot);
                     if (overlappedSlot == null) continue;
 
                     // 슬롯 타입이 인벤토리 슬롯이라면

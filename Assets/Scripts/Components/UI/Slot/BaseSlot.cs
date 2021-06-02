@@ -93,7 +93,6 @@ public class BaseSlot :
 
     void IDragHandler.OnDrag(PointerEventData eventData)
     {
-    
     }
 
     void IEndDragHandler.OnEndDrag(PointerEventData eventData)
@@ -150,4 +149,5 @@ public class BaseSlot :
         // 영역 겹침 끝
         m_ScreenInstance.dragDropOperation?.OnPointerExit(this);
     }
+
 }

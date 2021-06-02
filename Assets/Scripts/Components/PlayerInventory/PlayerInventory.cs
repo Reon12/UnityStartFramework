@@ -28,6 +28,14 @@ public sealed class PlayerInventory : MonoBehaviour
         playerInventoryWnd.onWndClosedEvent += () => playerInventoryWnd = null;
     }
 
+    public void CloseInventoryWnd()
+    {
+        if (playerInventoryWnd == null) return;
+
+        PlayerManager.Instance.playerController.
+            screenInstance.CloseWnd(false, playerInventoryWnd);
+    }
+
     // 아이템 스왑
     public void SwapItem(InventorySlot first, InventorySlot second)
     {
@@ -54,14 +62,14 @@ public sealed class PlayerInventory : MonoBehaviour
         GamePlayerController gamePlayerController = PlayerManager.Instance.playerController as GamePlayerController;
         ref PlayerCharacterInfo playerCharacterInfo = ref gamePlayerController.playerCharacterInfo;
 
-        
+        // 드래그가 시작되는 아이템 슬롯 정보
         ItemSlotInfo oriItemSlotInfo = playerCharacterInfo.inventoryItemInfos[ori.inventoryItemSlotIndex];
+        // 드래그 드랍이 되었을때 위치한 아이템 슬롯 정보
         ItemSlotInfo targetItemSlotInfo = playerCharacterInfo.inventoryItemInfos[target.inventoryItemSlotIndex];
 
         int maxSlotCount = ori.itemInfo.maxSlotItemCount;
-
         // 둘중 하나라도 최대 개수라면 스왑
-        if (oriItemSlotInfo.itemCount == maxSlotCount  || targetItemSlotInfo.maxSlotCount == maxSlotCount) SwapItem(ori, target);
+        if (oriItemSlotInfo.itemCount == maxSlotCount  || targetItemSlotInfo.itemCount == maxSlotCount) SwapItem(ori, target);
         else
         {
             int addable = maxSlotCount - targetItemSlotInfo.itemCount;
@@ -90,11 +98,5 @@ public sealed class PlayerInventory : MonoBehaviour
         }
     }
 
-    public void CloseInventoryWnd()
-    {
-        if (playerInventoryWnd == null) return;
-
-        PlayerManager.Instance.playerController.
-            screenInstance.CloseWnd(false, playerInventoryWnd);
-    }
+    
 }
