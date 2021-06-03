@@ -98,5 +98,27 @@ public sealed class PlayerInventory : MonoBehaviour
         }
     }
 
+    public void RemoveItem(int itemSlotIndex)
+    {
+        ref var playerInfo = ref (PlayerManager.Instance.playerController as GamePlayerController).playerCharacterInfo;
+
+        ItemSlotInfo itemSlotInfo = playerInfo.inventoryItemInfos[itemSlotIndex];
+        itemSlotInfo.itemCount = 0;
+
+        // 슬롯 비우기
+        itemSlotInfo.Clear();
+        
+        // 슬롯 정보 제거
+        playerInfo.inventoryItemInfos[itemSlotIndex] = itemSlotInfo;
+
+        if (playerInventoryWnd)
+        {
+            // 슬롯 갱신
+            InventorySlot inventorySlot = playerInventoryWnd.itemSlot[itemSlotIndex];
+
+            inventorySlot.SetItemInfo(itemSlotInfo.itemCode);
+            inventorySlot.UpdateInventoryItemSlot();
+        }
+    }
     
 }

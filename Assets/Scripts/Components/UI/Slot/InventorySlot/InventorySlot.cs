@@ -28,6 +28,7 @@ public class InventorySlot : ItemSlot
             {
                 Color slotImageColor = new Color(0.3f, 0.3f, 0.6f);
                 slotImage.color = slotImageColor;
+                
             }
 
             // 드래그 비쥬얼 이미지를 슬롯 이미지로 설정
@@ -48,21 +49,21 @@ public class InventorySlot : ItemSlot
                 foreach (var overlappedComponent in dragDropOperation.overlappedComponents)
                 {
                     BaseSlot overlappedSlot = overlappedComponent as BaseSlot;
-                    Debug.Log(overlappedSlot);
                     if (overlappedSlot == null) continue;
+
+                    InventorySlot inventorySlot = overlappedComponent as InventorySlot;
+
+                    GamePlayerController playerController = (PlayerManager.Instance.playerController) as GamePlayerController;
+                    ref PlayerCharacterInfo playerCharacterInfo = ref playerController.playerCharacterInfo;
 
                     // 슬롯 타입이 인벤토리 슬롯이라면
                     if (overlappedSlot.slotType == SlotType.InventoryItemSlot)
                     {
-                        InventorySlot inventorySlot = overlappedComponent as InventorySlot;
-
                         // 아이템 슬롯이 비어있다면 스왑 x
                         if (_ItemInfo.IsEmpty) continue;
 
                         slotImage.color = new Color(1.0f, 1.0f, 1.0f);
 
-                        GamePlayerController playerController = (PlayerManager.Instance.playerController) as GamePlayerController;
-                        ref PlayerCharacterInfo playerCharacterInfo = ref playerController.playerCharacterInfo;
 
                         bool isSameItem =
                             playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] == playerCharacterInfo.inventoryItemInfos[inventoryItemSlotIndex];
@@ -70,6 +71,14 @@ public class InventorySlot : ItemSlot
                         playerController.playerInventory.MergeItem(this, inventorySlot);
                         else
                         playerController.playerInventory.SwapItem(this, inventorySlot);
+                    }
+                    // 퀵슬롯 일 경우
+                    else if (overlappedSlot.slotType == SlotType.QuickSlot)
+                    {
+                        QuickSlot quickSlot = overlappedSlot as QuickSlot;
+
+                        // 옮긴 아이템 슬롯을 비웁니다.
+                        playerController.playerInventory.RemoveItem(inventoryItemSlotIndex);
                     }
                 }
 

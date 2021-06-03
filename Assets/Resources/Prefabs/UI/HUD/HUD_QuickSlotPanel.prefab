@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 2974001645023300893}
   - component: {fileID: 977861814940429380}
   m_Layer: 5
-  m_Name: Panel_Inventory
+  m_Name: Panel_Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,11 +257,11 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 500, y: 105}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &6686337613112674927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,6 +274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1982e0bd19345bb4b9a696eba6d6e68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _HUD_QuickSlotPanel: {fileID: 6181532686892437500}
 --- !u!1 &6396290992455680829
 GameObject:
   m_ObjectHideFlags: 0
