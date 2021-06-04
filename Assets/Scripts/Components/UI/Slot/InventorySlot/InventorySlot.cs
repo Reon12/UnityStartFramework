@@ -77,9 +77,15 @@ public class InventorySlot : ItemSlot
                     {
                         QuickSlot quickSlot = overlappedSlot as QuickSlot;
 
-                        // 옮긴 아이템 슬롯을 비웁니다.
-                        playerController.playerInventory.RemoveItem(inventoryItemSlotIndex);
+                        if (itemInfo.itemType == ItemType.Consumption)
+                        {
+                            // 옮긴 아이템 슬롯을 비웁니다.
+                            playerController.playerInventory.RemoveItem(inventoryItemSlotIndex);
+                        }
                     }
+                    else
+                    slotImage.color = new Color(1.0f, 1.0f, 1.0f);
+
                 }
 
             };

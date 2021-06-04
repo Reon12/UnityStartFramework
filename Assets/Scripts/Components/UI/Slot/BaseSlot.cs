@@ -23,10 +23,15 @@ public class BaseSlot :
 
     protected SlotType m_SlotType;
 
+    protected ItemType m_ItemType;
+
     public Image slotImage => _Image_Slot;
     public TextMeshProUGUI countText => _TMP_Count;
 
     public SlotType slotType => m_SlotType;
+
+    public ItemType itemType => m_ItemType;
+
     // 드래그 드랍 사용 여부
     protected bool m_UseDragDrop = false;
 

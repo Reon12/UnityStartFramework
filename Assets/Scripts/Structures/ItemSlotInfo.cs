@@ -9,6 +9,7 @@ public struct ItemSlotInfo
 
     public int itemCount;
 
+
     public int maxSlotCount;
 
     public ItemSlotInfo(string itemcode, int itemCount, int maxSlotCount)

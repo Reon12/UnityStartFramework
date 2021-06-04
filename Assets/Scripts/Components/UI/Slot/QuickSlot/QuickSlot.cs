@@ -60,6 +60,7 @@ public class QuickSlot : BaseSlot
                     {
                         QuickSlot otherQuickSlot = dragDropOp.overlappedComponents[0] as QuickSlot;
 
+                        // 아이템 코드가 동일하면 아이템을 합치고 그렇지 않으면 스왑합니다.
                         SwapQuickSlot(this, otherQuickSlot);
                     }
                 }
@@ -101,6 +102,22 @@ public class QuickSlot : BaseSlot
         second.SetSlotItemCount(second._QuickSlotInfo.count);
     }
 
+    // 퀵슬롯 아이템 합치기
+    private void MergeQuickSlot(QuickSlot ori, QuickSlot target)
+    {
+        // 합치려는 슬롯중 하나라도 최대아이템개수라면 아이템 스왑
+        if (ori._QuickSlotInfo.count == ori.itemInfo.maxSlotItemCount || target._QuickSlotInfo.count == target.itemInfo.maxSlotItemCount) SwapQuickSlot(ori, target);
+        int temp = target.itemInfo.maxSlotItemCount - target._QuickSlotInfo.count;
+        if (temp > ori._QuickSlotInfo.count)
+            temp = ori._QuickSlotInfo.count;
+
+        ori._QuickSlotInfo.count -= temp;
+        target._QuickSlotInfo.count += temp;
+
+        if (ori._QuickSlotInfo.count == 0)
+        {
+        }
+    }
     // 퀵슬롯 정보 업데이트
     private void UpdateQuickSlot(BaseSlot linkedSlot)
     {
@@ -114,10 +131,14 @@ public class QuickSlot : BaseSlot
         {
             case SlotType.InventoryItemSlot:
                 {
+                    // 퀵슬롯 정보 저장
                     ItemSlotInfo itemSlotInfo = gamePlayerController.playerCharacterInfo.inventoryItemInfos[_QuickSlotInfo.linkedInventorySlotIndex];
                     ItemInfo itemInfo = ResourceManager.Instance.LoadJson<ItemInfo>(
                         "ItemInfos",
                         itemSlotInfo.itemCode + ".json", out fileNotFound);
+
+                    // 아이템 타입이 소비아이템이 아니라면 실행 x
+                    if (itemInfo.itemType != ItemType.Consumption) break;
 
                     _QuickSlotInfo.count = itemSlotInfo.itemCount;
 
@@ -141,5 +162,11 @@ public class QuickSlot : BaseSlot
             default:
                 break;
         }
+    }
+
+    private void ClearQuickSlot()
+    {
+        quickSlotInfo.count = 0;
+        Debug.Log(slotImage.sprite);
     }
 }

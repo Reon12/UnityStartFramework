@@ -107,7 +107,8 @@ public sealed class PlayerInventory : MonoBehaviour
 
         // 슬롯 비우기
         itemSlotInfo.Clear();
-        
+        itemSlotInfo.itemCode = null;
+
         // 슬롯 정보 제거
         playerInfo.inventoryItemInfos[itemSlotIndex] = itemSlotInfo;
 
