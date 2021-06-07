@@ -42,6 +42,7 @@ public struct PlayerCharacterInfo
         inventoryItemInfos[2] = new ItemSlotInfo("90001", 5, 0);
         inventoryItemInfos[3] = new ItemSlotInfo("90001", 6, 0);
         inventoryItemInfos[4] = new ItemSlotInfo("90001", 7, 0);
+        inventoryItemInfos[9] = new ItemSlotInfo("90009", 7, 0);
 
     }
 }

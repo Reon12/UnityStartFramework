@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class QuickSlot : BaseSlot
+public class QuickSlot : BaseSlot   
 {
     [SerializeField] private TextMeshProUGUI _TMP_KeyCode;
 
     [SerializeField] private KeyCode _HotKey;
 
     private QuickSlotInfo _QuickSlotInfo;
-
-    private ItemInfo itemInfo;
 
     public KeyCode hotKey { set => _HotKey = value; }
 
@@ -48,9 +47,10 @@ public class QuickSlot : BaseSlot
         onSlotDragFinished += (dragDropOp) =>
         {
             slotImage.color = new Color(1.0f, 1.0f, 1.0f);
+            // 퀵슬롯을 드래그 했을때
             if (dragDropOp.originatedComponent == this)
             {
-                if (string.IsNullOrEmpty(_QuickSlotInfo.inCode)) return;
+                if (string.IsNullOrEmpty(_QuickSlotInfo.itemCode)) return;
                 foreach(var overlappedComponent in dragDropOp.overlappedComponents)
                 {
                     BaseSlot otherSlot = overlappedComponent as BaseSlot;
@@ -60,8 +60,10 @@ public class QuickSlot : BaseSlot
                     {
                         QuickSlot otherQuickSlot = dragDropOp.overlappedComponents[0] as QuickSlot;
 
-                        // 아이템 코드가 동일하면 아이템을 합치고 그렇지 않으면 스왑합니다.
-                        SwapQuickSlot(this, otherQuickSlot);
+                        // 두 슬롯의 아이템 코드가 동일하면 합치고 아니면 스왑시킵니다.
+                        if (_QuickSlotInfo.itemCode == otherQuickSlot._QuickSlotInfo.itemCode)
+                            MergeQuickSlot(this, otherQuickSlot);
+                        else SwapQuickSlot(this, otherQuickSlot);
                     }
                 }
             }
@@ -73,11 +75,14 @@ public class QuickSlot : BaseSlot
                 if (_QuickSlotInfo.linkedSlotType == SlotType.InventoryItemSlot)
                 {
                     InventorySlot inventorySlot = linkedSlot as InventorySlot;
-
-                    _QuickSlotInfo.inCode = inventorySlot.itemInfo.itemCode;
-                    _QuickSlotInfo.linkedInventorySlotIndex = inventorySlot.inventoryItemSlotIndex;
+                    if (inventorySlot.itemInfo.itemType != ItemType.Consumption) return;
+                    else
+                    {
+                        _QuickSlotInfo.itemCode = inventorySlot.itemInfo.itemCode;
+                        _QuickSlotInfo.linkedInventorySlotIndex = inventorySlot.inventoryItemSlotIndex;
+                        _QuickSlotInfo.maxSlotCount = inventorySlot.itemInfo.maxSlotItemCount;
+                    }
                 }
-
                 UpdateQuickSlot(linkedSlot);
             }
         };
@@ -100,24 +105,45 @@ public class QuickSlot : BaseSlot
 
         first.SetSlotItemCount(first._QuickSlotInfo.count);
         second.SetSlotItemCount(second._QuickSlotInfo.count);
+
     }
 
     // 퀵슬롯 아이템 합치기
     private void MergeQuickSlot(QuickSlot ori, QuickSlot target)
     {
         // 합치려는 슬롯중 하나라도 최대아이템개수라면 아이템 스왑
-        if (ori._QuickSlotInfo.count == ori.itemInfo.maxSlotItemCount || target._QuickSlotInfo.count == target.itemInfo.maxSlotItemCount) SwapQuickSlot(ori, target);
-        int temp = target.itemInfo.maxSlotItemCount - target._QuickSlotInfo.count;
-        if (temp > ori._QuickSlotInfo.count)
-            temp = ori._QuickSlotInfo.count;
-
-        ori._QuickSlotInfo.count -= temp;
-        target._QuickSlotInfo.count += temp;
-
-        if (ori._QuickSlotInfo.count == 0)
+        if (ori._QuickSlotInfo.count == ori._QuickSlotInfo.maxSlotCount || target._QuickSlotInfo.count == target._QuickSlotInfo.maxSlotCount)
+            SwapQuickSlot(ori, target);
+        else
         {
+            int temp = target._QuickSlotInfo.maxSlotCount - target._QuickSlotInfo.count;
+            if (temp > ori._QuickSlotInfo.count)
+                temp = ori._QuickSlotInfo.count;
+
+            ori._QuickSlotInfo.count -= temp;
+            target._QuickSlotInfo.count += temp;
+            ori.SetSlotItemCount(ori._QuickSlotInfo.count);
+            target.SetSlotItemCount(target._QuickSlotInfo.count);
+
+            if (ori._QuickSlotInfo.count == 0)
+                ClearQuickSlot(ori.slotImage.sprite, ori._QuickSlotInfo.itemCode, ori._QuickSlotInfo.linkedInventorySlotIndex);
+
         }
+
     }
+
+    public void ClearQuickSlot(Sprite image, string itemCode, int slotIndex)
+    {
+        ref QuickSlotInfo quickSlotInfo = ref _QuickSlotInfo;
+
+        Vector2 position = new Vector2(0.0f, 0.0f);
+        Vector2 size = new Vector2(42.0f, 42.0f);
+        Rect rect = new Rect(position, size);
+        slotImage.sprite = image = Sprite.Create(m_T_Null, rect, Vector2.zero);
+        _QuickSlotInfo.itemCode = itemCode = null;
+        _QuickSlotInfo.linkedInventorySlotIndex = slotIndex = 0;
+    }
+
     // 퀵슬롯 정보 업데이트
     private void UpdateQuickSlot(BaseSlot linkedSlot)
     {
@@ -137,9 +163,6 @@ public class QuickSlot : BaseSlot
                         "ItemInfos",
                         itemSlotInfo.itemCode + ".json", out fileNotFound);
 
-                    // 아이템 타입이 소비아이템이 아니라면 실행 x
-                    if (itemInfo.itemType != ItemType.Consumption) break;
-
                     _QuickSlotInfo.count = itemSlotInfo.itemCount;
 
                     Texture2D itemimage = ResourceManager.Instance.LoadResource<Texture2D>("", itemInfo.itemImagePath, false);
@@ -158,15 +181,13 @@ public class QuickSlot : BaseSlot
             case SlotType.ShopItemSlot:
                 break;
             case SlotType.QuickSlot:
+                {
+                }
                 break;
             default:
                 break;
         }
     }
 
-    private void ClearQuickSlot()
-    {
-        quickSlotInfo.count = 0;
-        Debug.Log(slotImage.sprite);
-    }
+   
 }
