@@ -28,6 +28,7 @@ public sealed class InventoryWnd : ClosableWnd
 
         UpdateCash();
 
+        
     }
 
     // 인벤토리 초기화

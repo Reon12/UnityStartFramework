@@ -9,8 +9,7 @@ public sealed class MessageBoxWnd : ClosableWnd
     public event System.Action<ScreenInstance, MessageBoxWnd> onOkButtonClicked;
     public event System.Action<ScreenInstance, MessageBoxWnd> onCancelButtonClicked;
 
-    [SerializeField] private TextMeshProUGUI _TMP_Message;
-    [SerializeField] private Button _Button_Ok;
+    [SerializeField] private Button _Button_Yes;
     [SerializeField] private Button _Button_Cancel;
 
     [HideInInspector] public RectTransform m_MsgBoxBackground;
@@ -28,13 +27,12 @@ public sealed class MessageBoxWnd : ClosableWnd
     /// - titleText : 메시지 박스 타이틀에 표시될 문자열을 전달합니다.
     /// - message : 메시지 박스 내용을 전달합니다.
     /// - useButton : 표시될 버튼을 전달합니다.
-    public void InitializeMessageBox(string tilteText, string message, params MessageBoxButton[] useButton)
+    public void InitializeMessageBox(string tilteText, params MessageBoxButton[] useButton)
     {
         // 메시지 타이틀 설정
         SetTitleText(tilteText);
 
         // 메시지 내용 설정
-        _TMP_Message.text = message;
 
         byte useButtonToByte = 0;
         foreach(MessageBoxButton use in useButton)
@@ -43,11 +41,11 @@ public sealed class MessageBoxWnd : ClosableWnd
         }
 
         // 버튼 이벤트 설정
-        _Button_Ok.onClick.AddListener(() => onOkButtonClicked?.Invoke(m_ScreenInstance, this));
+        _Button_Yes.onClick.AddListener(() => onOkButtonClicked?.Invoke(m_ScreenInstance, this));
         _Button_Cancel.onClick.AddListener(() => onCancelButtonClicked?.Invoke(m_ScreenInstance, this));
 
         // 버튼 표시 / 숨김
-        ButtonVisibility(_Button_Ok, MessageBoxButton.Ok, useButtonToByte);
+        ButtonVisibility(_Button_Yes, MessageBoxButton.Ok, useButtonToByte);
         ButtonVisibility(_Button_Cancel, MessageBoxButton.Cancel, useButtonToByte);
     }
 

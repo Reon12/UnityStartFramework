@@ -14,7 +14,6 @@ public class ItemSlot : BaseSlot
         base.InitializeSlot(slotType, inCode);
 
         SetItemInfo(inCode);
-
         UpdateItemImage();
     }
 

@@ -17,7 +17,7 @@ public class ScreenInstanceBase : ScreenInstance
         if (!_MsgBoxBackgroundPrefab)
         {
             _MsgBoxBackgroundPrefab = ResourceManager.Instance.LoadResource<GameObject>(
-                "Panel_MessageBoxBackgroudn",
+                "Panel_MessageBoxBackground",
                 "Prefabs/UI/ClosableWnd/MessageBoxWnd/Panel_MessageBoxBackground").transform as RectTransform;
 
             _Wnd_MessageBoxWndPrefab = ResourceManager.Instance.LoadResource<GameObject>(
@@ -32,7 +32,6 @@ public class ScreenInstanceBase : ScreenInstance
     /// - useButton : 사용하는 버튼들을 전달합니다.
     public MessageBoxWnd CreateMessageBox(
         string titleText,
-        string message,
         bool useBackground,
         params MessageBoxButton[] useButton)
     {
@@ -50,7 +49,7 @@ public class ScreenInstanceBase : ScreenInstance
         newMessageBox.m_MsgBoxBackground = msgBoxBackground;
 
         // 메시지 박스 초기화
-        newMessageBox.InitializeMessageBox(titleText, message, useButton);
+        newMessageBox.InitializeMessageBox(titleText, useButton);
 
         // 생성한 메시지 박스 창 반환
         return newMessageBox;

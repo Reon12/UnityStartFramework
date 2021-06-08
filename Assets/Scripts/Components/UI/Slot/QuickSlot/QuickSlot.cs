@@ -65,6 +65,21 @@ public class QuickSlot : BaseSlot
                             MergeQuickSlot(this, otherQuickSlot);
                         else SwapQuickSlot(this, otherQuickSlot);
                     }
+                    else if (otherSlot.slotType == SlotType.InventoryItemSlot)
+                    {
+                        ref PlayerCharacterInfo playerCharacterInfo = ref (PlayerManager.Instance.playerController as GamePlayerController).playerCharacterInfo;
+                        InventorySlot inventorySlot = overlappedComponent as InventorySlot;
+
+                        ItemSlotInfo itemSlotInfo = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex];
+                        itemSlotInfo.itemCount = _QuickSlotInfo.count;
+                        itemSlotInfo.itemCode = _QuickSlotInfo.itemCode;
+
+                        playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
+                        inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, _QuickSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
+
+                        ClearQuickSlot(slotImage.sprite, _QuickSlotInfo.itemCode, _QuickSlotInfo.linkedInventorySlotIndex, _QuickSlotInfo.count);
+                    }
+
                 }
             }
             else
@@ -126,13 +141,13 @@ public class QuickSlot : BaseSlot
             target.SetSlotItemCount(target._QuickSlotInfo.count);
 
             if (ori._QuickSlotInfo.count == 0)
-                ClearQuickSlot(ori.slotImage.sprite, ori._QuickSlotInfo.itemCode, ori._QuickSlotInfo.linkedInventorySlotIndex);
+                ClearQuickSlot(ori.slotImage.sprite, ori._QuickSlotInfo.itemCode, ori._QuickSlotInfo.linkedInventorySlotIndex, _QuickSlotInfo.count);
 
         }
 
     }
 
-    public void ClearQuickSlot(Sprite image, string itemCode, int slotIndex)
+    public void ClearQuickSlot(Sprite image, string itemCode, int slotIndex, int itemCount)
     {
         ref QuickSlotInfo quickSlotInfo = ref _QuickSlotInfo;
 
@@ -142,6 +157,8 @@ public class QuickSlot : BaseSlot
         slotImage.sprite = image = Sprite.Create(m_T_Null, rect, Vector2.zero);
         _QuickSlotInfo.itemCode = itemCode = null;
         _QuickSlotInfo.linkedInventorySlotIndex = slotIndex = 0;
+        _QuickSlotInfo.count = itemCount = 0;
+        SetSlotItemCount(itemCount);
     }
 
     // 퀵슬롯 정보 업데이트

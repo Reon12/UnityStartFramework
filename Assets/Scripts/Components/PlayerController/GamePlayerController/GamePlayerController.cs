@@ -31,6 +31,7 @@ public class GamePlayerController : PlayerController
         _QuickSlotPanel = screenInstance.CreateChildHUD(
             _HUD_QuickSlotPanelPrefab, UnityStartUpFramework.Enums.InputMode.GameOnly, false, true, 500.0f, 105.0f);
 
+        
     }
     private void Update()
     {

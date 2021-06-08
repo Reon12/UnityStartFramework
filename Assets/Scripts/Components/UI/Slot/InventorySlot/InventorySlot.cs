@@ -39,6 +39,7 @@ public class InventorySlot : ItemSlot
             dragDropOperation.onDragCancelled += () =>
             {
                 Debug.Log($"[드래그 취소] 드래그 취소 슬롯 인덱스 : {inventoryItemSlotIndex}");
+                
                 slotImage.color = new Color(1.0f, 1.0f, 1.0f);
             };
 
