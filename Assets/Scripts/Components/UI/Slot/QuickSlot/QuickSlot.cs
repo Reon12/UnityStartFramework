@@ -135,8 +135,18 @@ public class QuickSlot : BaseSlot
         {
             // 아이템 개수 1 감소
             SetSlotItemCount(--_QuickSlotInfo.count);
+            StartCoroutine(CoolTime(7.0f));
             if (_QuickSlotInfo.count == 0)
                 ClearQuickSlot();
+        }
+    }
+    IEnumerator CoolTime(float cool)
+    {
+        while (cool > 1.0f)
+        {
+            cool -= Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+            Debug.Log(cool);
         }
     }
     // 퀵슬롯 스왑

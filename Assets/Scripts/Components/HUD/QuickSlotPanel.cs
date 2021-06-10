@@ -6,6 +6,9 @@ public class QuickSlotPanel : MonoBehaviour
 {
     [SerializeField] private RectTransform _HUD_QuickSlotPanel;
 
+    [SerializeField] private RectTransform _Panel_QuickSlotBackgroundPrefab;
+
+
     private int _QuickSlotCount = 5;
 
 
