@@ -45,8 +45,8 @@ public sealed class MessageBoxWnd : ClosableWnd
         _Button_Cancel.onClick.AddListener(() => onCancelButtonClicked?.Invoke(m_ScreenInstance, this));
 
         // 버튼 표시 / 숨김
-        ButtonVisibility(_Button_Yes, MessageBoxButton.Ok, useButtonToByte);
-        ButtonVisibility(_Button_Cancel, MessageBoxButton.Cancel, useButtonToByte);
+        //ButtonVisibility(_Button_Yes, MessageBoxButton.Ok, useButtonToByte);
+        //ButtonVisibility(_Button_Cancel, MessageBoxButton.Cancel, useButtonToByte);
     }
 
     public override void CloseThisWnd()

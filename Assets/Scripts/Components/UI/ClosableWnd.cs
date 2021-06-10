@@ -17,6 +17,7 @@ public class ClosableWnd : ClosableWndBase
 		_ClosableWndTitlebar = transform.GetComponentInChildren<ClosableWndTitlebar>();
 
 		// 닫기 버튼이 눌린 경우 이 창을 닫도록 합니다.
+		if (_ClosableWndTitlebar.closeButton != null)
 		_ClosableWndTitlebar.closeButton.onClick.AddListener(CloseThisWnd);
 	}
 

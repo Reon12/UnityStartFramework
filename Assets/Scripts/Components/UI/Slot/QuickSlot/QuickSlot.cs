@@ -40,7 +40,22 @@ public class QuickSlot : BaseSlot
 
 
             dragDropOp.onDragCancelled += () =>
-            slotImage.color = new Color(1.0f, 1.0f, 1.0f);
+            {
+                MessageBoxWnd msgBox = (m_ScreenInstance as ScreenInstanceBase).CreateMessageBox(
+                    "경고", true);
+                msgBox.onOkButtonClicked += (screenInstance, msgBoxWnd) =>
+                {
+                    msgBoxWnd.CloseThisWnd();
+                    ClearQuickSlot(slotImage.sprite, _QuickSlotInfo.itemCode, _QuickSlotInfo.linkedInventorySlotIndex, _QuickSlotInfo.count);
+                };
+                msgBox.onCancelButtonClicked += (screenInstance, msgBoxWnd) =>
+                {
+                    msgBoxWnd.CloseThisWnd();
+                };
+                
+
+                slotImage.color = new Color(1.0f, 1.0f, 1.0f);
+            };
         };
 
         // 드래그 드랍 시 실행될 내용
