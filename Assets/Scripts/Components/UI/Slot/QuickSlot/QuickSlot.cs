@@ -46,7 +46,7 @@ public class QuickSlot : BaseSlot
                 msgBox.onOkButtonClicked += (screenInstance, msgBoxWnd) =>
                 {
                     msgBoxWnd.CloseThisWnd();
-                    ClearQuickSlot(slotImage.sprite, _QuickSlotInfo.itemCode, _QuickSlotInfo.linkedInventorySlotIndex, _QuickSlotInfo.count);
+                    ClearQuickSlot();
                 };
                 msgBox.onCancelButtonClicked += (screenInstance, msgBoxWnd) =>
                 {
@@ -92,7 +92,7 @@ public class QuickSlot : BaseSlot
                         playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
                         inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, _QuickSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
 
-                        ClearQuickSlot(slotImage.sprite, _QuickSlotInfo.itemCode, _QuickSlotInfo.linkedInventorySlotIndex, _QuickSlotInfo.count);
+                        ClearQuickSlot();
                     }
 
                 }
@@ -120,6 +120,25 @@ public class QuickSlot : BaseSlot
 
     }
 
+    public void Update()
+    {
+        InputKey();
+    }
+
+    // 키 입력 확인
+    private void InputKey()
+    {
+        if (_QuickSlotInfo.itemCode == null) return;
+        
+        // 퀵슬롯 키가 눌렸을 경우 1 ~ 5
+        if (Input.GetKeyDown(_HotKey))
+        {
+            // 아이템 개수 1 감소
+            SetSlotItemCount(--_QuickSlotInfo.count);
+            if (_QuickSlotInfo.count == 0)
+                ClearQuickSlot();
+        }
+    }
     // 퀵슬롯 스왑
     private void SwapQuickSlot(QuickSlot first, QuickSlot second)
     {
@@ -156,24 +175,25 @@ public class QuickSlot : BaseSlot
             target.SetSlotItemCount(target._QuickSlotInfo.count);
 
             if (ori._QuickSlotInfo.count == 0)
-                ClearQuickSlot(ori.slotImage.sprite, ori._QuickSlotInfo.itemCode, ori._QuickSlotInfo.linkedInventorySlotIndex, _QuickSlotInfo.count);
+                ClearQuickSlot();
 
         }
 
     }
 
-    public void ClearQuickSlot(Sprite image, string itemCode, int slotIndex, int itemCount)
+    // 퀵슬롯 비우기
+    public void ClearQuickSlot()
     {
         ref QuickSlotInfo quickSlotInfo = ref _QuickSlotInfo;
 
         Vector2 position = new Vector2(0.0f, 0.0f);
         Vector2 size = new Vector2(42.0f, 42.0f);
         Rect rect = new Rect(position, size);
-        slotImage.sprite = image = Sprite.Create(m_T_Null, rect, Vector2.zero);
-        _QuickSlotInfo.itemCode = itemCode = null;
-        _QuickSlotInfo.linkedInventorySlotIndex = slotIndex = 0;
-        _QuickSlotInfo.count = itemCount = 0;
-        SetSlotItemCount(itemCount);
+        slotImage.sprite = Sprite.Create(m_T_Null, rect, Vector2.zero);
+        _QuickSlotInfo.itemCode = null;
+        _QuickSlotInfo.linkedInventorySlotIndex = 0;
+        _QuickSlotInfo.count = 0;
+        SetSlotItemCount(_QuickSlotInfo.count);
     }
 
     // 퀵슬롯 정보 업데이트

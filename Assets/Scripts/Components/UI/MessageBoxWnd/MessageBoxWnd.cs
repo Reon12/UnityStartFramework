@@ -11,12 +11,12 @@ public sealed class MessageBoxWnd : ClosableWnd
 
     [SerializeField] private Button _Button_Yes;
     [SerializeField] private Button _Button_Cancel;
-
+    [SerializeField] private TextMeshProUGUI _Input_ItemCount;
     [HideInInspector] public RectTransform m_MsgBoxBackground;
 
     private void ButtonVisibility(Button button, MessageBoxButton buttonType, byte visibility)
     {
-        byte buttonTypeToByte = (byte)buttonType;
+        byte buttonTypeToByte = (byte)buttonType; 
 
         button.gameObject.SetActive(
             (buttonTypeToByte & visibility) != 0);

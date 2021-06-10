@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 8016666698597710409}
   - component: {fileID: 470877146422650611}
   m_Layer: 5
-  m_Name: TMP_Yes
+  m_Name: TMP_Cancel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -983,9 +983,9 @@ MonoBehaviour:
   m_BeClose: 0
   Text_TitleBar: {fileID: 0}
   _Button_CloseWnd: {fileID: 0}
-  _TMP_Message: {fileID: 0}
-  _Button_Ok: {fileID: 0}
+  _Button_Yes: {fileID: 0}
   _Button_Cancel: {fileID: 0}
+  _Input_ItemCount: {fileID: 3284010315464347926}
   m_MsgBoxBackground: {fileID: 0}
 --- !u!1 &5592177722986242824
 GameObject:
@@ -1000,7 +1000,7 @@ GameObject:
   - component: {fileID: 4301870380671159891}
   - component: {fileID: 4646473734169802085}
   m_Layer: 5
-  m_Name: Button_Yes (1)
+  m_Name: Button_Cancel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

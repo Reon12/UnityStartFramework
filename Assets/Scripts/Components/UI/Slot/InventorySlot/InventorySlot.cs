@@ -38,8 +38,23 @@ public class InventorySlot : ItemSlot
             // 드래그 취소
             dragDropOperation.onDragCancelled += () =>
             {
-                Debug.Log($"[드래그 취소] 드래그 취소 슬롯 인덱스 : {inventoryItemSlotIndex}");
-                
+                // 메시지 박스 생성
+                MessageBoxWnd msgBox = (m_ScreenInstance as ScreenInstanceBase).CreateMessageBox(
+                    "경고!", true);
+
+                // 메시지 박스 ok버튼 클릭시 실행될 내용
+                msgBox.onOkButtonClicked += (screenInstance, msgBoxWnd) =>
+                {
+                    GamePlayerController gamePlayerController = PlayerManager.Instance.playerController as GamePlayerController;
+                    gamePlayerController.playerInventory.RemoveItem(inventoryItemSlotIndex);
+                    msgBoxWnd.CloseThisWnd();
+                };
+                // 메시지 박스 Cancel버튼 클릭시 실행될 내용
+                msgBox.onCancelButtonClicked += (screenInstance, msgBoxWnd) =>
+                {
+                    msgBoxWnd.CloseThisWnd();
+                };
+
                 slotImage.color = new Color(1.0f, 1.0f, 1.0f);
             };
 

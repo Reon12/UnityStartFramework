@@ -22,6 +22,8 @@ public class QuickSlotPanel : MonoBehaviour
         CreateQuickSlot();
     }
 
+    
+    // 퀵슬롯 생성
     private void CreateQuickSlot()
     {
         for (int i = 0; i < _QuickSlotCount; ++i)
@@ -32,4 +34,6 @@ public class QuickSlotPanel : MonoBehaviour
         }
 
     }
+
+   
 }
