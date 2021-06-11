@@ -16,6 +16,7 @@ public class QuickSlot : BaseSlot
 
     public ref QuickSlotInfo quickSlotInfo => ref _QuickSlotInfo;
 
+    public QuickSlotBackground _QuickslotBackground;
     public void InitializeQuickSlot(KeyCode hotKey, string hotkeyText)
     {
         _HotKey = hotKey;
@@ -25,6 +26,10 @@ public class QuickSlot : BaseSlot
     protected override void Awake()
     {
         base.Awake();
+
+
+        _QuickslotBackground = GetComponent<QuickSlotBackground>();
+
 
         // 슬롯 타입 설정
         m_SlotType = SlotType.QuickSlot;
@@ -135,6 +140,7 @@ public class QuickSlot : BaseSlot
         {
             // 아이템 개수 1 감소
             SetSlotItemCount(--_QuickSlotInfo.count);
+            //m_ScreenInstance.CreateChildHUD<>
             StartCoroutine(CoolTime(7.0f));
             if (_QuickSlotInfo.count == 0)
                 ClearQuickSlot();
@@ -145,6 +151,7 @@ public class QuickSlot : BaseSlot
         while (cool > 1.0f)
         {
             cool -= Time.deltaTime;
+            _QuickslotBackground.SetFillamount(cool);
             yield return new WaitForFixedUpdate();
             Debug.Log(cool);
         }

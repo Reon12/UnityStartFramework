@@ -275,6 +275,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HUD_QuickSlotPanel: {fileID: 6181532686892437500}
+  _Panel_QuickSlotBackgroundPrefab: {fileID: 4867247108239847315, guid: 552e860eb59928f4885afdda5c13259f,
+    type: 3}
+  _TMP_CoolTime: {fileID: 0}
 --- !u!1 &6396290992455680829
 GameObject:
   m_ObjectHideFlags: 0

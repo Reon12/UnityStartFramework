@@ -1,18 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class QuickSlotPanel : MonoBehaviour
 {
     [SerializeField] private RectTransform _HUD_QuickSlotPanel;
 
-    [SerializeField] private RectTransform _Panel_QuickSlotBackgroundPrefab;
-
 
     private int _QuickSlotCount = 5;
 
 
-    QuickSlot _Panel_QuickSlotPrefab;
+    private QuickSlot _Panel_QuickSlotPrefab;
+
 
     public RectTransform rectTransform => transform as RectTransform;
 
@@ -22,6 +22,8 @@ public class QuickSlotPanel : MonoBehaviour
             _Panel_QuickSlotPrefab = ResourceManager.Instance.LoadResource<GameObject>(
                 "Panel_QuickSlot", "Prefabs/UI/Slot/Panel_QuickSlot").GetComponent<QuickSlot>();
 
+
+        
         CreateQuickSlot();
     }
 
