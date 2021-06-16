@@ -370,7 +370,7 @@ MonoBehaviour:
   _Image_Slot: {fileID: 7418928484466900629}
   _TMP_KeyCode: {fileID: 8006649008284528773}
   _HotKey: 0
-  _QuickSlotBackground: {fileID: 4867247108239847315, guid: 552e860eb59928f4885afdda5c13259f,
+  _QuickslotBackground: {fileID: 9167621396027541409, guid: 552e860eb59928f4885afdda5c13259f,
     type: 3}
 --- !u!1 &6103588539793899034
 GameObject:

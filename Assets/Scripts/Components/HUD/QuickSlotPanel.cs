@@ -22,8 +22,6 @@ public class QuickSlotPanel : MonoBehaviour
             _Panel_QuickSlotPrefab = ResourceManager.Instance.LoadResource<GameObject>(
                 "Panel_QuickSlot", "Prefabs/UI/Slot/Panel_QuickSlot").GetComponent<QuickSlot>();
 
-
-        
         CreateQuickSlot();
     }
 
@@ -34,6 +32,7 @@ public class QuickSlotPanel : MonoBehaviour
         for (int i = 0; i < _QuickSlotCount; ++i)
         {
             QuickSlot newQuickSlot = Instantiate(_Panel_QuickSlotPrefab, _HUD_QuickSlotPanel);
+
             newQuickSlot.InitializeQuickSlot((KeyCode)((int)KeyCode.Alpha1 + i), (i + 1).ToString());
 
         }

@@ -88,7 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aab642eebc59b4a4ea8b5ad834ac0179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _QuickSlotBackground: {fileID: 4867247108239847315}
+  _Panel_QuickSlot: {fileID: 4867247108239847315, guid: ae174b0b91a9b53408d8f55a1d3c765d,
+    type: 3}
+  _QuickSlotBackground: {fileID: 7055800294684108195}
   _TMP_CoolTime: {fileID: 6697854292712637569}
 --- !u!1 &5283676318503670347
 GameObject:

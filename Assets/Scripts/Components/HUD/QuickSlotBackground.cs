@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class QuickSlotBackground : MonoBehaviour
 {
+    [SerializeField] private RectTransform _Panel_QuickSlot;
+
     [SerializeField] private Image _QuickSlotBackground;
 
     [SerializeField] private TextMeshProUGUI _TMP_CoolTime;
@@ -15,6 +17,11 @@ public class QuickSlotBackground : MonoBehaviour
 
     public TextMeshProUGUI coolTime => _TMP_CoolTime;
 
+
+    private void Awake()
+    {
+        
+    }
     public void SetText(string text)
     {
         coolTime.text = text;
