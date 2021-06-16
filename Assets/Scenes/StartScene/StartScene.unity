@@ -157,6 +157,8 @@ MonoBehaviour:
     itemType: 1
     itemImagePath: Image/ItemImage/apple
     maxSlotItemCount: 10
+    itemCoolTime: 5
+    useCoolTime: 1
     priceToSilver: 50
     priceToGold: 0
     priceToDiamond: 0
@@ -166,6 +168,8 @@ MonoBehaviour:
     itemType: 2
     itemImagePath: Image/ItemImage/armor
     maxSlotItemCount: 1
+    itemCoolTime: 0
+    useCoolTime: 0
     priceToSilver: 100
     priceToGold: 20
     priceToDiamond: 0
@@ -176,6 +180,8 @@ MonoBehaviour:
     itemType: 2
     itemImagePath: Image/ItemImage/axe
     maxSlotItemCount: 1
+    itemCoolTime: 0
+    useCoolTime: 0
     priceToSilver: 200
     priceToGold: 10
     priceToDiamond: 0
@@ -185,6 +191,8 @@ MonoBehaviour:
     itemType: 2
     itemImagePath: '"Image/ItemImage/gloves"'
     maxSlotItemCount: 1
+    itemCoolTime: 0
+    useCoolTime: 0
     priceToSilver: 50
     priceToGold: 5
     priceToDiamond: 10
@@ -194,6 +202,8 @@ MonoBehaviour:
     itemType: 2
     itemImagePath: Image/ItemImage/boots
     maxSlotItemCount: 1
+    itemCoolTime: 0
+    useCoolTime: 0
     priceToSilver: 100
     priceToGold: 20
     priceToDiamond: 0
@@ -204,6 +214,8 @@ MonoBehaviour:
     itemType: 2
     itemImagePath: '"Image/ItemImage/belts"'
     maxSlotItemCount: 1
+    itemCoolTime: 0
+    useCoolTime: 0
     priceToSilver: 60
     priceToGold: 0
     priceToDiamond: 5
@@ -213,6 +225,8 @@ MonoBehaviour:
     itemType: 0
     itemImagePath: Image/ItemImage/gem
     maxSlotItemCount: 5
+    itemCoolTime: 0
+    useCoolTime: 0
     priceToSilver: 0
     priceToGold: 0
     priceToDiamond: 0
@@ -222,6 +236,8 @@ MonoBehaviour:
     itemType: 2
     itemImagePath: Image/ItemImage/helmets
     maxSlotItemCount: 1
+    itemCoolTime: 0
+    useCoolTime: 0
     priceToSilver: 100
     priceToGold: 10
     priceToDiamond: 5
@@ -231,6 +247,8 @@ MonoBehaviour:
     itemType: 1
     itemImagePath: Image/ItemImage/hp
     maxSlotItemCount: 50
+    itemCoolTime: 10
+    useCoolTime: 1
     priceToSilver: 20
     priceToGold: 0
     priceToDiamond: 0
@@ -240,6 +258,8 @@ MonoBehaviour:
     itemType: 1
     itemImagePath: Image/ItemImage/mp
     maxSlotItemCount: 50
+    itemCoolTime: 10
+    useCoolTime: 1
     priceToSilver: 35
     priceToGold: 0
     priceToDiamond: 0

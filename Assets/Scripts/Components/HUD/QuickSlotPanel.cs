@@ -7,12 +7,9 @@ public class QuickSlotPanel : MonoBehaviour
 {
     [SerializeField] private RectTransform _HUD_QuickSlotPanel;
 
-
     private int _QuickSlotCount = 5;
 
-
     private QuickSlot _Panel_QuickSlotPrefab;
-
 
     public RectTransform rectTransform => transform as RectTransform;
 

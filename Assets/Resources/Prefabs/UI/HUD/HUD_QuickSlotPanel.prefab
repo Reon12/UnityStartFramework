@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1730900280869527610}
   - component: {fileID: 993854398922311654}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Frame_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 4068201275556266469}
   - component: {fileID: 2790156479374791138}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Frame_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -275,9 +275,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HUD_QuickSlotPanel: {fileID: 6181532686892437500}
-  _Panel_QuickSlotBackgroundPrefab: {fileID: 4867247108239847315, guid: 552e860eb59928f4885afdda5c13259f,
-    type: 3}
-  _TMP_CoolTime: {fileID: 0}
 --- !u!1 &6396290992455680829
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,1 +1,1 @@
-{"itemCode":"90009","itemName":"체력포션","itemDescription":"마시면 체력이 회복된다","itemType":1,"itemImagePath":"Image/ItemImage/hp","maxSlotItemCount":50,"itemCoolTime":7.0,"useCoolTime":true,"priceToSilver":20,"priceToGold":0,"priceToDiamond":0}
+{"itemCode":"90009","itemName":"체력포션","itemDescription":"마시면 체력이 회복된다","itemType":1,"itemImagePath":"Image/ItemImage/hp","maxSlotItemCount":50,"itemCoolTime":10.0,"priceToSilver":20,"priceToGold":0,"priceToDiamond":0}

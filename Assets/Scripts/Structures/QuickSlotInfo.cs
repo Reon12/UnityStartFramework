@@ -19,13 +19,16 @@ public struct QuickSlotInfo
     // 개수
     public int count;
 
-    public QuickSlotInfo(SlotType linkedSlotType, int linkedInventorySlotIndex, string itemCode, int count, int maxSlotCount)
+    public float coolTime;
+
+    public QuickSlotInfo(SlotType linkedSlotType, int linkedInventorySlotIndex, string itemCode, int count, int maxSlotCount, float coolTime)
     {
         this.linkedSlotType = linkedSlotType;
         this.linkedInventorySlotIndex = linkedInventorySlotIndex;
         this.itemCode = itemCode;
         this.count = count;
         this.maxSlotCount = maxSlotCount;
+        this.coolTime = coolTime;
     }
 
 }

@@ -7,7 +7,6 @@ public class ScreenInstanceBase : ScreenInstance
 {
     private static RectTransform _MsgBoxBackgroundPrefab;
     private static MessageBoxWnd _Wnd_MessageBoxWndPrefab;
-    private static MessageBoxWnd _Wnd_DropItem;
 
 
     protected override void Awake()
@@ -23,8 +22,6 @@ public class ScreenInstanceBase : ScreenInstance
             _Wnd_MessageBoxWndPrefab = ResourceManager.Instance.LoadResource<GameObject>(
                 "Wnd_MessageBoxWnd", "Prefabs/UI/ClosableWnd/MessageBoxWnd/Wnd_MessageBox").GetComponent<MessageBoxWnd>();
 
-            _Wnd_DropItem = ResourceManager.Instance.LoadResource<GameObject>(
-                "Wnd_DropItem", "Prefabs/UI/ClosableWnd/MessageBoxWnd/Wnd_DropItem").GetComponent<MessageBoxWnd>();
         }
     }
 

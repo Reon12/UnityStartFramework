@@ -1,20 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class QuickSlot : BaseSlot   
+public class QuickSlot : BaseSlot
 {
     [SerializeField] private TextMeshProUGUI _TMP_KeyCode;
 
     [SerializeField] private KeyCode _HotKey;
+
+    [SerializeField] private Image _SlotBackgroundImage;
+
+    [SerializeField] private TextMeshProUGUI _Text_CoolTime;
 
     private QuickSlotInfo _QuickSlotInfo;
 
     public KeyCode hotKey { set => _HotKey = value; }
 
     public ref QuickSlotInfo quickSlotInfo => ref _QuickSlotInfo;
+
+    // 시작 쿨타임
+    public float currentCoolTime;
+
+    // 쿨타임 여부
+    public bool isCoolTime;
 
     public void InitializeQuickSlot(KeyCode hotKey, string hotkeyText)
     {
@@ -26,8 +37,14 @@ public class QuickSlot : BaseSlot
     {
         base.Awake();
 
+        // 슬롯 쿨타임 이미지 / 텍스트 초기화
+        {
+            _SlotBackgroundImage.fillAmount = 0.0f;
 
+            _Text_CoolTime.text = "";
 
+            isCoolTime = false;
+        }
 
         // 슬롯 타입 설정
         m_SlotType = SlotType.QuickSlot;
@@ -41,25 +58,29 @@ public class QuickSlot : BaseSlot
             dragVisual.SetDragImageFromSprite(slotImage.sprite);
             slotImage.color = new Color(0.3f, 0.3f, 0.3f);
 
-
             dragDropOp.onDragCancelled += () =>
             {
-                MessageBoxWnd msgBox = (m_ScreenInstance as ScreenInstanceBase).CreateMessageBox(
-                    "경고", true);
-                msgBox.onOkButtonClicked += (screenInstance, msgBoxWnd) =>
+                if (_QuickSlotInfo.itemCode != null && !isCoolTime)
                 {
-                    msgBoxWnd.CloseThisWnd();
-                    ClearQuickSlot();
-                };
-                msgBox.onCancelButtonClicked += (screenInstance, msgBoxWnd) =>
-                {
-                    msgBoxWnd.CloseThisWnd();
-                };
-                
+                    MessageBoxWnd msgBox = (m_ScreenInstance as ScreenInstanceBase).CreateMessageBox(
+                        "경고", true);
+                    msgBox.onOkButtonClicked += (screenInstance, msgBoxWnd) =>
+                    {
+                        msgBoxWnd.CloseThisWnd();
+                        ClearQuickSlot();
+                    };
+                    msgBox.onCancelButtonClicked += (screenInstance, msgBoxWnd) =>
+                    {
+                        msgBoxWnd.CloseThisWnd();
+                    };
+                }
+
 
                 slotImage.color = new Color(1.0f, 1.0f, 1.0f);
             };
         };
+
+
 
         // 드래그 드랍 시 실행될 내용
         onSlotDragFinished += (dragDropOp) =>
@@ -69,7 +90,7 @@ public class QuickSlot : BaseSlot
             if (dragDropOp.originatedComponent == this)
             {
                 if (string.IsNullOrEmpty(_QuickSlotInfo.itemCode)) return;
-                foreach(var overlappedComponent in dragDropOp.overlappedComponents)
+                foreach (var overlappedComponent in dragDropOp.overlappedComponents)
                 {
                     BaseSlot otherSlot = overlappedComponent as BaseSlot;
 
@@ -78,10 +99,13 @@ public class QuickSlot : BaseSlot
                     {
                         QuickSlot otherQuickSlot = dragDropOp.overlappedComponents[0] as QuickSlot;
 
-                        // 두 슬롯의 아이템 코드가 동일하면 합치고 아니면 스왑시킵니다.
-                        if (_QuickSlotInfo.itemCode == otherQuickSlot._QuickSlotInfo.itemCode)
-                            MergeQuickSlot(this, otherQuickSlot);
-                        else SwapQuickSlot(this, otherQuickSlot);
+                        if (!isCoolTime)
+                        {
+                            // 두 슬롯의 아이템 코드가 동일하면 합치고 아니면 스왑시킵니다.
+                            if (_QuickSlotInfo.itemCode == otherQuickSlot._QuickSlotInfo.itemCode)
+                                MergeQuickSlot(this, otherQuickSlot);
+                            else SwapQuickSlot(this, otherQuickSlot);
+                        }
                     }
                     else if (otherSlot.slotType == SlotType.InventoryItemSlot)
                     {
@@ -103,7 +127,7 @@ public class QuickSlot : BaseSlot
             else
             {
                 BaseSlot linkedSlot = dragDropOp.originatedComponent as BaseSlot;
-                _QuickSlotInfo.linkedSlotType = linkedSlot.slotType;    
+                _QuickSlotInfo.linkedSlotType = linkedSlot.slotType;
 
                 if (_QuickSlotInfo.linkedSlotType == SlotType.InventoryItemSlot)
                 {
@@ -119,7 +143,7 @@ public class QuickSlot : BaseSlot
                 UpdateQuickSlot(linkedSlot);
             }
         };
-        
+
 
     }
 
@@ -132,26 +156,60 @@ public class QuickSlot : BaseSlot
     private void InputKey()
     {
         if (_QuickSlotInfo.itemCode == null) return;
-        
+
+        if (isCoolTime) return;
+
         // 퀵슬롯 키가 눌렸을 경우 1 ~ 5
         if (Input.GetKeyDown(_HotKey))
         {
             // 아이템 개수 1 감소
             SetSlotItemCount(--_QuickSlotInfo.count);
-            StartCoroutine(CoolTime(7.0f));
-            if (_QuickSlotInfo.count == 0)
+            if (_QuickSlotInfo.count != 0)
+                StartCoroutine(CoolTime());
+            else
+            {
                 ClearQuickSlot();
+                ClearCoolTime();
+            }
+
         }
     }
-    IEnumerator CoolTime(float cool)
-    {
-        while (cool > 1.0f)
-        {
-            cool -= Time.deltaTime;
 
+    // 쿨타임 코루틴 정의
+    IEnumerator CoolTime()
+    {
+        currentCoolTime = _QuickSlotInfo.coolTime;
+
+        while (currentCoolTime >= 0.0f)
+        {
+            currentCoolTime -= Time.deltaTime;
+
+            _SlotBackgroundImage.fillAmount = currentCoolTime / _QuickSlotInfo.coolTime;
+
+            string resultCoolTime = currentCoolTime.ToString("N1");
+            if (resultCoolTime == "10.0")
+                resultCoolTime = "10";
+
+            SetCoolTimeText(resultCoolTime);
+
+            isCoolTime = true;
             yield return new WaitForFixedUpdate();
-            Debug.Log(cool);
         }
+        if (currentCoolTime <= 0)
+            ClearCoolTime();
+    }
+
+    // 스킬 쿨타임 텍스트 설정
+    private void SetCoolTimeText(string text)
+    {
+        _Text_CoolTime.text = text;
+    }
+
+    // 쿨타임 텍스트 지우기 / 쿨타임 사용 비활성화
+    private void ClearCoolTime()
+    {
+        _Text_CoolTime.text = "";
+        isCoolTime = false;
     }
 
     // 퀵슬롯 스왑
@@ -191,7 +249,6 @@ public class QuickSlot : BaseSlot
 
             if (ori._QuickSlotInfo.count == 0)
                 ClearQuickSlot();
-
         }
 
     }
@@ -232,6 +289,9 @@ public class QuickSlot : BaseSlot
 
                     _QuickSlotInfo.count = itemSlotInfo.itemCount;
 
+                    _QuickSlotInfo.coolTime = itemInfo.itemCoolTime;
+
+
                     Texture2D itemimage = ResourceManager.Instance.LoadResource<Texture2D>("", itemInfo.itemImagePath, false);
 
                     Rect rect = new Rect(0.0f, 0.0f, itemimage.width, itemimage.height);
@@ -256,5 +316,5 @@ public class QuickSlot : BaseSlot
         }
     }
 
-   
+
 }

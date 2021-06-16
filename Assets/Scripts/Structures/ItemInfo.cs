@@ -26,9 +26,6 @@ public struct ItemInfo
     // 아이템 사용 쿨타임
     public float itemCoolTime;
 
-    // 아이템 쿨타임 사용 여부
-    public bool useCoolTime;
-
     // 아이템 판매 가격
     public int priceToSilver;
     public int priceToGold;
@@ -37,7 +34,7 @@ public struct ItemInfo
     public bool IsEmpty => string.IsNullOrEmpty(itemCode);
 
     public ItemInfo(string itemCode, string itemName, string itemDescription,
-        ItemType itemType, string itemImagePath, int maxSlotItemCount, float itemCoolTime, int priceToSilver, int priceToGold, int priceToDiamond, bool useCoolTime)
+        ItemType itemType, string itemImagePath, int maxSlotItemCount, float itemCoolTime, int priceToSilver, int priceToGold, int priceToDiamond)
     {
         this.itemCode = itemCode;
         this.itemName = itemName;
@@ -49,6 +46,5 @@ public struct ItemInfo
         this.priceToGold = priceToGold;
         this.priceToDiamond = priceToDiamond;
         this.itemCoolTime = itemCoolTime;
-        this.useCoolTime = useCoolTime;
     }
 }
