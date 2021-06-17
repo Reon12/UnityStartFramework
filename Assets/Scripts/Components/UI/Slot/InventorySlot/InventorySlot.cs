@@ -80,7 +80,6 @@ public class InventorySlot : ItemSlot
 
                         slotImage.color = new Color(1.0f, 1.0f, 1.0f);
 
-
                         bool isSameItem =
                             playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] == playerCharacterInfo.inventoryItemInfos[inventoryItemSlotIndex];
                         if (isSameItem)
@@ -92,7 +91,7 @@ public class InventorySlot : ItemSlot
                     else if (overlappedSlot.slotType == SlotType.QuickSlot)
                     {
                         QuickSlot quickSlot = overlappedSlot as QuickSlot;
-
+                            
                         if (itemInfo.itemType == ItemType.Consumption)
                             // 옮긴 아이템 슬롯을 비웁니다.
                             playerController.playerInventory.RemoveItem(inventoryItemSlotIndex);
