@@ -109,17 +109,29 @@ public class QuickSlot : BaseSlot
                     }
                     else if (otherSlot.slotType == SlotType.InventoryItemSlot)
                     {
+                        
                         ref PlayerCharacterInfo playerCharacterInfo = ref (PlayerManager.Instance.playerController as GamePlayerController).playerCharacterInfo;
                         InventorySlot inventorySlot = overlappedComponent as InventorySlot;
 
+                       
                         ItemSlotInfo itemSlotInfo = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex];
                         itemSlotInfo.itemCount = _QuickSlotInfo.count;
                         itemSlotInfo.itemCode = _QuickSlotInfo.itemCode;
+                        
+                        if (inventorySlot.itemInfo.itemCode == null)
+                        {
 
-                        playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
-                        inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, _QuickSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
+                            playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
+                            inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, itemSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
+                            ClearQuickSlot();
+                        }
+                        else
+                        {
+                            // 여기서 스왑해주기
+                            playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
+                            inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, _QuickSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
+                        }
 
-                        ClearQuickSlot();
                     }
 
                 }
@@ -132,6 +144,8 @@ public class QuickSlot : BaseSlot
                 if (_QuickSlotInfo.linkedSlotType == SlotType.InventoryItemSlot)
                 {
                     InventorySlot inventorySlot = linkedSlot as InventorySlot;
+                    GamePlayerController playerController = (PlayerManager.Instance.playerController) as GamePlayerController;
+
                     if (inventorySlot.itemInfo.itemType != ItemType.Consumption) return;
                     else
                     {

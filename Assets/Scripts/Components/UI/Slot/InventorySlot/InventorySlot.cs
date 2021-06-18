@@ -22,7 +22,6 @@ public class InventorySlot : ItemSlot
         // 드래그 시작시 실행할 내용 정의
         onSlotDragStarted += (dragDropOperation, dragVisual) =>
         {
-
             // 슬롯이 비어있지 않다면 드래그 한 아이템 어둡게 표시
             if (!_ItemInfo.IsEmpty)
             {
@@ -92,9 +91,13 @@ public class InventorySlot : ItemSlot
                     {
                         QuickSlot quickSlot = overlappedSlot as QuickSlot;
                             
+                        // 퀵슬롯에 아이템이 존재한다면 인벤토리에 있는 아이템과 스왑
                         if (itemInfo.itemType == ItemType.Consumption)
+                        {
                             // 옮긴 아이템 슬롯을 비웁니다.
                             playerController.playerInventory.RemoveItem(inventoryItemSlotIndex);
+
+                        }
                         slotImage.color = new Color(1.0f, 1.0f, 1.0f);
                     }
 

@@ -56,6 +56,7 @@ public sealed class PlayerInventory : MonoBehaviour
         second.UpdateInventoryItemSlot();
     }
 
+   
     // 아이템 합치기
     public void MergeItem(InventorySlot ori, InventorySlot target)
     {
@@ -66,6 +67,8 @@ public sealed class PlayerInventory : MonoBehaviour
         ItemSlotInfo oriItemSlotInfo = playerCharacterInfo.inventoryItemInfos[ori.inventoryItemSlotIndex];
         // 드래그 드랍이 되었을때 위치한 아이템 슬롯 정보
         ItemSlotInfo targetItemSlotInfo = playerCharacterInfo.inventoryItemInfos[target.inventoryItemSlotIndex];
+
+        if (ori.inventoryItemSlotIndex == target.inventoryItemSlotIndex) return;
 
         int maxSlotCount = ori.itemInfo.maxSlotItemCount;
         // 둘중 하나라도 최대 개수라면 스왑
