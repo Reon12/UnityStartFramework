@@ -82,6 +82,20 @@ public class BaseSlot :
     public void SetSlotItemCount(int itemCount, bool visibleLessThan2 = false) =>
         _TMP_Count.text = (itemCount >= 2 || visibleLessThan2) ? itemCount.ToString() : "";
 
+    public void ChageItem(InventorySlot inventorySlot, PlayerCharacterInfo playerCharacterInfo, QuickSlot quickSlot)
+    {
+        var target = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex];
+
+        target.itemCode = quickSlot.quickSlotInfo.itemCode;
+        target.itemCount = quickSlot.quickSlotInfo.count;
+
+        quickSlot.quickSlotInfo.count = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCount;
+        quickSlot.quickSlotInfo.itemCode = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCode;
+
+        playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = target;
+
+        quickSlot.UpdateQuickSlot();
+    }
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
     {

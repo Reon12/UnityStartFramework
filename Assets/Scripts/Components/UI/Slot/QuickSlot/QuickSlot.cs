@@ -120,32 +120,18 @@ public class QuickSlot : BaseSlot
 
                         if (inventorySlot.itemInfo.itemCode == null)
                         {
-                            Debug.Log("if call!");
                             playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
                             inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, itemSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
                             ClearQuickSlot();
                         }
                         else
                         {
-                            Debug.Log("else call!");
-                            // 여기서 스왑해주기
+                            // 아이템 타입이 소비아이템이 아니라면 실행 x
+                            if (inventorySlot.itemInfo.itemType != ItemType.Consumption) return;
 
-                            if (inventorySlot.itemType == ItemType.Consumption)
-                            {
-                                ChageItem(inventorySlot, playerCharacterInfo);
-
-                                playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
-                                inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, itemSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
-
-                            }
-
-                            //var code = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCode;
-                            //var count = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCount;
-                            //
-                            //
-                            //_QuickSlotInfo.count = count;
-                            //_QuickSlotInfo.itemCode = code;
-                            //UpdateQuickSlot();
+                            ChageItem(inventorySlot, playerCharacterInfo, this);
+                            playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
+                            inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, itemSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
                         }
 
                     }
@@ -165,6 +151,13 @@ public class QuickSlot : BaseSlot
                     if (inventorySlot.itemInfo.itemType != ItemType.Consumption) return;
                     else
                     {
+                        if (_QuickSlotInfo.itemCode != null)
+                        {
+                            ChageItem(inventorySlot, playerController.playerCharacterInfo, this);
+                            UpdateQuickSlot();
+                            inventorySlot.InitializeInventoryItemSlot(slotType, quickSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
+                            Debug.Log(slotType);
+                        }
                         _QuickSlotInfo.itemCode = inventorySlot.itemInfo.itemCode;
                         _QuickSlotInfo.linkedInventorySlotIndex = inventorySlot.inventoryItemSlotIndex;
                         _QuickSlotInfo.maxSlotCount = inventorySlot.itemInfo.maxSlotItemCount;
@@ -315,7 +308,7 @@ public class QuickSlot : BaseSlot
    }
 
     // 퀵슬롯 정보 업데이트
-    private void UpdateQuickSlot()
+    public void UpdateQuickSlot()
     {
         GamePlayerController gamePlayerController = PlayerManager.Instance.playerController as GamePlayerController;
 
@@ -335,7 +328,6 @@ public class QuickSlot : BaseSlot
                         itemSlotInfo = new ItemSlotInfo(_QuickSlotInfo.itemCode, _QuickSlotInfo.count, _QuickSlotInfo.maxSlotCount);
                     }
 
-                    Debug.Log(itemSlotInfo.itemCode);
                     ItemInfo itemInfo = ResourceManager.Instance.LoadJson<ItemInfo>(
                         "ItemInfos",
                         itemSlotInfo.itemCode + ".json", out fileNotFound);
@@ -343,7 +335,6 @@ public class QuickSlot : BaseSlot
                     _QuickSlotInfo.count = itemSlotInfo.itemCount;
 
                     _QuickSlotInfo.coolTime = itemInfo.itemCoolTime;
-
 
                     Texture2D itemimage = ResourceManager.Instance.LoadResource<Texture2D>("", itemInfo.itemImagePath, false);
 

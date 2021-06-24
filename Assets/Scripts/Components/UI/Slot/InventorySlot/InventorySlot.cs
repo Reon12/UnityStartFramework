@@ -91,7 +91,7 @@ public class InventorySlot : ItemSlot
                     {
                         QuickSlot quickSlot = overlappedSlot as QuickSlot;
                             
-                        // 퀵슬롯에 아이템이 존재한다면 인벤토리에 있는 아이템과 스왑
+                        
                         if (itemInfo.itemType == ItemType.Consumption)
                         {
                             // 옮긴 아이템 슬롯을 비웁니다.
