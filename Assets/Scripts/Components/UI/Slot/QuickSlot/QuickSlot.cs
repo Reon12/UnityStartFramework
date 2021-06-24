@@ -117,19 +117,35 @@ public class QuickSlot : BaseSlot
                         ItemSlotInfo itemSlotInfo = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex];
                         itemSlotInfo.itemCount = _QuickSlotInfo.count;
                         itemSlotInfo.itemCode = _QuickSlotInfo.itemCode;
-                        
+
                         if (inventorySlot.itemInfo.itemCode == null)
                         {
-
+                            Debug.Log("if call!");
                             playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
                             inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, itemSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
                             ClearQuickSlot();
                         }
                         else
                         {
+                            Debug.Log("else call!");
                             // 여기서 스왑해주기
-                            playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
-                            inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, _QuickSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
+
+                            if (inventorySlot.itemType == ItemType.Consumption)
+                            {
+                                ChageItem(inventorySlot, playerCharacterInfo);
+
+                                playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
+                                inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, itemSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
+
+                            }
+
+                            //var code = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCode;
+                            //var count = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCount;
+                            //
+                            //
+                            //_QuickSlotInfo.count = count;
+                            //_QuickSlotInfo.itemCode = code;
+                            //UpdateQuickSlot();
                         }
 
                     }
@@ -154,7 +170,7 @@ public class QuickSlot : BaseSlot
                         _QuickSlotInfo.maxSlotCount = inventorySlot.itemInfo.maxSlotItemCount;
                     }
                 }
-                UpdateQuickSlot(linkedSlot);
+                UpdateQuickSlot();
             }
         };
 
@@ -282,8 +298,24 @@ public class QuickSlot : BaseSlot
         SetSlotItemCount(_QuickSlotInfo.count);
     }
 
+   private void ChageItem(InventorySlot inventorySlot, PlayerCharacterInfo playerCharacterInfo)
+   {
+        var target = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex];
+
+        target.itemCode = _QuickSlotInfo.itemCode;
+        target.itemCount = _QuickSlotInfo.count;
+
+        _QuickSlotInfo.count = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCount;
+        _QuickSlotInfo.itemCode = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCode;
+
+        playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = target;
+
+        UpdateQuickSlot();
+       
+   }
+
     // 퀵슬롯 정보 업데이트
-    private void UpdateQuickSlot(BaseSlot linkedSlot)
+    private void UpdateQuickSlot()
     {
         GamePlayerController gamePlayerController = PlayerManager.Instance.playerController as GamePlayerController;
 
@@ -297,6 +329,13 @@ public class QuickSlot : BaseSlot
                 {
                     // 퀵슬롯 정보 저장
                     ItemSlotInfo itemSlotInfo = gamePlayerController.playerCharacterInfo.inventoryItemInfos[_QuickSlotInfo.linkedInventorySlotIndex];
+
+                    if (itemSlotInfo.isEmpty())
+                    {
+                        itemSlotInfo = new ItemSlotInfo(_QuickSlotInfo.itemCode, _QuickSlotInfo.count, _QuickSlotInfo.maxSlotCount);
+                    }
+
+                    Debug.Log(itemSlotInfo.itemCode);
                     ItemInfo itemInfo = ResourceManager.Instance.LoadJson<ItemInfo>(
                         "ItemInfos",
                         itemSlotInfo.itemCode + ".json", out fileNotFound);
