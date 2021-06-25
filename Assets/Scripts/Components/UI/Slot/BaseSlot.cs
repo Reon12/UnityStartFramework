@@ -88,13 +88,10 @@ public class BaseSlot :
 
         target.itemCode = quickSlot.quickSlotInfo.itemCode;
         target.itemCount = quickSlot.quickSlotInfo.count;
-
         quickSlot.quickSlotInfo.count = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCount;
         quickSlot.quickSlotInfo.itemCode = playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCode;
 
         playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = target;
-
-        quickSlot.UpdateQuickSlot();
     }
 
     void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)

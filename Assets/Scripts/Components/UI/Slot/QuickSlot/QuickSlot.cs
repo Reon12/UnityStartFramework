@@ -130,6 +130,7 @@ public class QuickSlot : BaseSlot
                             if (inventorySlot.itemInfo.itemType != ItemType.Consumption) return;
 
                             ChageItem(inventorySlot, playerCharacterInfo, this);
+                            UpdateQuickSlot();
                             playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] = itemSlotInfo;
                             inventorySlot.InitializeInventoryItemSlot(otherSlot.slotType, itemSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
                         }
@@ -145,29 +146,31 @@ public class QuickSlot : BaseSlot
 
                 if (_QuickSlotInfo.linkedSlotType == SlotType.InventoryItemSlot)
                 {
+                    ref PlayerCharacterInfo playerCharacterInfo = ref (PlayerManager.Instance.playerController as GamePlayerController).playerCharacterInfo;
                     InventorySlot inventorySlot = linkedSlot as InventorySlot;
                     GamePlayerController playerController = (PlayerManager.Instance.playerController) as GamePlayerController;
-
                     if (inventorySlot.itemInfo.itemType != ItemType.Consumption) return;
                     else
                     {
-                        if (_QuickSlotInfo.itemCode != null)
+                        if (_QuickSlotInfo.itemCode == null)
+                        {
+                             _QuickSlotInfo.itemCode = inventorySlot.itemInfo.itemCode;
+                             _QuickSlotInfo.linkedInventorySlotIndex = inventorySlot.inventoryItemSlotIndex;
+                             _QuickSlotInfo.maxSlotCount = inventorySlot.itemInfo.maxSlotItemCount;
+                            UpdateQuickSlot();
+                            playerController.playerInventory.RemoveItem(inventorySlot.inventoryItemSlotIndex);
+                        }
+                        else
                         {
                             ChageItem(inventorySlot, playerController.playerCharacterInfo, this);
+                            inventorySlot.InitializeInventoryItemSlot(linkedSlot.slotType, playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex].itemCode, inventorySlot.inventoryItemSlotIndex);
                             UpdateQuickSlot();
-                            inventorySlot.InitializeInventoryItemSlot(slotType, quickSlotInfo.itemCode, inventorySlot.inventoryItemSlotIndex);
-                            Debug.Log(slotType);
                         }
-                        _QuickSlotInfo.itemCode = inventorySlot.itemInfo.itemCode;
-                        _QuickSlotInfo.linkedInventorySlotIndex = inventorySlot.inventoryItemSlotIndex;
-                        _QuickSlotInfo.maxSlotCount = inventorySlot.itemInfo.maxSlotItemCount;
                     }
                 }
-                UpdateQuickSlot();
             }
         };
-
-
+        
     }
 
     public void Update()

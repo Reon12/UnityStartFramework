@@ -58,7 +58,7 @@ public class InventorySlot : ItemSlot
             };
 
             // 드래그 성공
-            dragDropOperation.onDragCompleted += () =>
+            dragDropOperation.onDragFinished += () =>
             {
                 // 모든 겹친 UI 에 추가된 컴포넌트 확인
                 foreach (var overlappedComponent in dragDropOperation.overlappedComponents)
@@ -89,15 +89,10 @@ public class InventorySlot : ItemSlot
                     // 퀵슬롯 일 경우
                     else if (overlappedSlot.slotType == SlotType.QuickSlot)
                     {
-                        QuickSlot quickSlot = overlappedSlot as QuickSlot;
-                            
-                        
-                        if (itemInfo.itemType == ItemType.Consumption)
-                        {
-                            // 옮긴 아이템 슬롯을 비웁니다.
-                            playerController.playerInventory.RemoveItem(inventoryItemSlotIndex);
+                        QuickSlot quickSlot = overlappedComponent as QuickSlot;
 
-                        }
+                        //playerController.playerInventory.RemoveItem(inventoryItemSlotIndex);
+
                         slotImage.color = new Color(1.0f, 1.0f, 1.0f);
                     }
 
