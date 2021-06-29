@@ -10,4 +10,10 @@ public class EquipmentSlot : ItemSlot
 
 
     }
+
+    public void InitializeEquipmentSlot(SlotType slotType, string itemCode)
+    {
+        base.InitializeSlot(slotType, itemCode);
+
+    }
 }

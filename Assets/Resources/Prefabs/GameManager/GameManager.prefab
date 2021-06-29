@@ -161,13 +161,17 @@ MonoBehaviour:
     key: 105
     game: 1
     ui: 1
+  - actionName: OpenEquipment
+    key: 112
+    game: 1
+    ui: 1
   _AxisInput:
   - axisName: Horizontal
     lowKey: 97
     highKey: 100
     game: 1
     ui: 0
-    useUnityInput: 0
+    useUnityInput: 1
   - axisName: Vertical
     lowKey: 115
     highKey: 119

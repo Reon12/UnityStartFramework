@@ -28,7 +28,12 @@ public class EquipmentWnd : ClosableWnd
 
         _Panel_EquipmentSlotPrefab = ResourceManager.Instance.LoadResource<GameObject>("Panel_EquipmentSlot",
             "Prefabs/UI/Slot/Panel_EquipmentSlot").GetComponent<EquipmentSlot>();
+
+        InitializeEquipmentWnd();
+
+        UpdateStatus();
     }
+
 
     private void InitializeEquipmentWnd()
     {
@@ -37,7 +42,21 @@ public class EquipmentWnd : ClosableWnd
 
         for (int i = 0; i< playerCharacterInfo.LeftEquipmentSlotCount; ++i)
         {
-        }    
+            var newLeftItemSlots = CreateLeftSlot();
+
+            _LeftItemSlots.Add(newLeftItemSlots);
+
+            newLeftItemSlots.InitializeEquipmentSlot(SlotType.EquipItemSlot, playerCharacterInfo.equipmentItemInfos[i].itemCode);
+        }
+        for (int i = 0; i < playerCharacterInfo.RightEquipmentSlotCount; ++i)
+        {
+            var newRightItemSlots = CreateRightSlot();
+
+            _RightItemSlots.Add(newRightItemSlots);
+
+            newRightItemSlots.InitializeEquipmentSlot(SlotType.EquipItemSlot, playerCharacterInfo.equipmentItemInfos[i].itemCode);
+
+        }
     }
 
     public void UpdateStatus()
@@ -51,7 +70,9 @@ public class EquipmentWnd : ClosableWnd
         _TMP_Critical.text = gamePlayerController.playerCharacterInfo.critical.ToString();
     }
 
-    private void CreateSlot() =>
+    private EquipmentSlot CreateLeftSlot() =>
         Instantiate(_Panel_EquipmentSlotPrefab, _Panel_LeftItemSlot);
 
+    private EquipmentSlot CreateRightSlot() =>
+        Instantiate(_Panel_EquipmentSlotPrefab, _Panel_RightItemSlot);
 }

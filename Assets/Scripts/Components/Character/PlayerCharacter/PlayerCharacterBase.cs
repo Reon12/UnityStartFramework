@@ -28,6 +28,7 @@ public class PlayerCharacterBase : PlayerableCharacterBase
     protected override void Update()
     {
         base.Update();
+
         playerController.AddYawAngle(InputManager.GetAxis("Mouse X"));
         playerController.AddPitchAngle(-InputManager.GetAxis("Mouse Y"));
         springArm.ZoomCamera(-InputManager.GetAxis("Mouse ScrollWheel"));

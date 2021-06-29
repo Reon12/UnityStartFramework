@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStartUpFramework.Enums;
 
 public class GamePlayerController : PlayerController
 {
@@ -11,6 +12,10 @@ public class GamePlayerController : PlayerController
     private PlayerInventory _PlayerInventory;
 
     public PlayerInventory playerInventory => _PlayerInventory;
+
+    private PlayerEquipment _PlayerEquipment;
+
+    public PlayerEquipment playerEquipment => _PlayerEquipment;
 
     protected override void Awake()
     {
@@ -23,21 +28,26 @@ public class GamePlayerController : PlayerController
         }
         _PlayerInventory = GetComponent<PlayerInventory>();
 
+        _PlayerEquipment = GetComponent<PlayerEquipment>();
 
     }
 
     private void Start()
     {
         _QuickSlotPanel = screenInstance.CreateChildHUD(
-            _HUD_QuickSlotPanelPrefab, UnityStartUpFramework.Enums.InputMode.GameOnly, false, true, 500.0f, 105.0f);
+            _HUD_QuickSlotPanelPrefab, InputMode.GameOnly, false, true, 500.0f, 105.0f);
 
         
     }
     private void Update()
     {
-        if (InputManager.GetAction("OpenInventory", UnityStartUpFramework.Enums.ActionEvent.Down))
+        if (InputManager.GetAction("OpenInventory", ActionEvent.Down))
         {
             _PlayerInventory.ToggleInventory();
+        }
+        if (InputManager.GetAction("OpenEquipment", ActionEvent.Down))
+        {
+            _PlayerEquipment.ToggleEquipmentWnd();
         }
     }
 }

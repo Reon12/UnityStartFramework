@@ -16,6 +16,8 @@ public struct PlayerCharacterInfo
     // 소지중인 아이템 정보
     public List<ItemSlotInfo> inventoryItemInfos;
 
+    public List<EquipmentSlotInfo> equipmentItemInfos;
+
     public ItemInfo itemInfos;
 
     // 플레이어 공격력

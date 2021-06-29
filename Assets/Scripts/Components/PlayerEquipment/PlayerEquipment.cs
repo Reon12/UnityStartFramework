@@ -9,7 +9,7 @@ public sealed class PlayerEquipment : MonoBehaviour
     private void Awake()
     {
         _Wnd_EquipmentWndPrefab = ResourceManager.Instance.LoadResource<GameObject>("Wnd_EquipmentPrefab",
-            "Prefabs/UI/ClosableWnd/EquipmentWnd/EquipmentWnd").GetComponent<EquipmentWnd>();
+            "Prefabs/UI/EquipmentWnd/EquipmentWnd").GetComponent<EquipmentWnd>();
     }
 
     public void ToggleEquipmentWnd()
