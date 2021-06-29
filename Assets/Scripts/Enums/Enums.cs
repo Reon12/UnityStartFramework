@@ -31,4 +31,22 @@ public enum ItemType
 
 }
 
+public enum EquipmentType
+{
+	// 투구
+	Helmet,
+
+	// 갑옷
+	Armor,
+
+	// 하의
+	Leg,
+
+	// 장갑
+	Glove,
+
+	// 신발
+	Shoes
+
+}
 

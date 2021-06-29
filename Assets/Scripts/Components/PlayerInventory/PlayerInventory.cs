@@ -6,7 +6,7 @@ public sealed class PlayerInventory : MonoBehaviour
 
     public InventoryWnd playerInventoryWnd { get; private set; }
 
-    public void Awake()
+    private void Awake()
     {
         _Wnd_PlayerInventoryPrefab = ResourceManager.Instance.LoadResource<GameObject>("Wnd_PlayerInventoryPrefab",
             "Prefabs/UI/InventoryWnd/InventoryWnd").GetComponent<InventoryWnd>();
