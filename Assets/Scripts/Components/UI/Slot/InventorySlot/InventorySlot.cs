@@ -19,6 +19,7 @@ public class InventorySlot : ItemSlot
         // 드래그 드랍 사용 여부
         m_UseDragDrop = true;
 
+        
         // 드래그 시작시 실행할 내용 정의
         onSlotDragStarted += (dragDropOperation, dragVisual) =>
         {
@@ -105,7 +106,7 @@ public class InventorySlot : ItemSlot
 
     public void InitializeInventoryItemSlot(SlotType slotType, string itemCode, int itemSlotIndex)
     {
-        base.InitializeSlot(slotType, itemCode);
+        base.InitializeSlot(slotType, itemCode, EquipmentType.None);
 
         _InventoryItemSlotIndex = itemSlotIndex;
 

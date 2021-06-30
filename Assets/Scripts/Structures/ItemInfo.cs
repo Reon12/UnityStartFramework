@@ -14,6 +14,9 @@ public struct ItemInfo
     // 아이템 설명
     public string itemDescription;
 
+    // 장비 아이템 타입
+    public EquipmentType equipmentType;
+
     // 아이템 타입
     public ItemType itemType;
 
@@ -31,20 +34,27 @@ public struct ItemInfo
     public int priceToGold;
     public int priceToDiamond;
 
+    public bool useMaxSlotItemCount;
+
     public bool IsEmpty => string.IsNullOrEmpty(itemCode);
 
     public ItemInfo(string itemCode, string itemName, string itemDescription,
-        ItemType itemType, string itemImagePath, int maxSlotItemCount, float itemCoolTime, int priceToSilver, int priceToGold, int priceToDiamond)
+        ItemType itemType, EquipmentType equipmentType, string itemImagePath, 
+        int maxSlotItemCount, float itemCoolTime,
+        int priceToSilver, int priceToGold, int priceToDiamond,
+        bool useMaxSlotItemCount)
     {
         this.itemCode = itemCode;
         this.itemName = itemName;
         this.itemDescription = itemDescription;
         this.itemType = itemType;
+        this.equipmentType = equipmentType;
         this.itemImagePath = itemImagePath;
         this.maxSlotItemCount = maxSlotItemCount;
         this.priceToSilver = priceToSilver;
         this.priceToGold = priceToGold;
         this.priceToDiamond = priceToDiamond;
         this.itemCoolTime = itemCoolTime;
+        this.useMaxSlotItemCount = useMaxSlotItemCount = false;
     }
 }

@@ -38,7 +38,7 @@ public sealed class PathFixer : EditorWindow
 		int pathStartIndex = originalPath.IndexOf("Resources/") + ("Resources/".Length);
 		int dotIndex = originalPath.IndexOf(".");
 
-		return $"\"{originalPath.Substring(pathStartIndex, dotIndex - pathStartIndex)}\"";
+		return $"{originalPath.Substring(pathStartIndex, dotIndex - pathStartIndex)}";
 		// Assets/Resources/Prefabs/Characters/PlayerableCharacter.prefab
 		// -> "Prefabs/Characters/PlayerableCharacter"
 	}

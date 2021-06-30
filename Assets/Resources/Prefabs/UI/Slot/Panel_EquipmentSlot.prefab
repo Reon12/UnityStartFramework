@@ -209,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TMP_Count: {fileID: 1575266158685565303}
   _Image_Slot: {fileID: 7418928484466900629}
+  _Image_EquipmentSlot: {fileID: 7055800294684108195}
 --- !u!1 &7094654137412391977
 GameObject:
   m_ObjectHideFlags: 0

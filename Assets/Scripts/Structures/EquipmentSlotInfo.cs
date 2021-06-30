@@ -11,6 +11,7 @@ public struct EquipmentSlotInfo
     // 장비 타입
     public EquipmentType equipmentType;
 
+
     public EquipmentSlotInfo(string itemCode, EquipmentType equipmentType)
     {
         this.itemCode = itemCode;

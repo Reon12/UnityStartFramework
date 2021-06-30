@@ -12,9 +12,9 @@ public struct ItemSlotInfo
 
     public int maxSlotCount;
 
-    public ItemSlotInfo(string itemcode, int itemCount, int maxSlotCount)
+    public ItemSlotInfo(string itemCode, int itemCount, int maxSlotCount)
     {
-        this.itemCode = itemcode;
+        this.itemCode = itemCode;
         this.itemCount = itemCount;
         this.maxSlotCount = maxSlotCount;
     }

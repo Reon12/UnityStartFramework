@@ -16,6 +16,7 @@ public class BaseSlot :
 {
     [SerializeField] private TextMeshProUGUI _TMP_Count;
     [SerializeField] private Image _Image_Slot;
+    [SerializeField] private Image _Image_EquipmentSlot;
 
     protected ScreenInstance m_ScreenInstance;
 
@@ -25,12 +26,18 @@ public class BaseSlot :
 
     protected ItemType m_ItemType;
 
+    protected EquipmentType m_EquipmentType;
+
     public Image slotImage => _Image_Slot;
+    public Image EquipSlotImage => _Image_EquipmentSlot;
+
     public TextMeshProUGUI countText => _TMP_Count;
 
     public SlotType slotType => m_SlotType;
 
     public ItemType itemType => m_ItemType;
+
+    public EquipmentType equipmentType => m_EquipmentType;
 
     // 드래그 드랍 사용 여부
     protected bool m_UseDragDrop = false;
@@ -49,8 +56,9 @@ public class BaseSlot :
 
     protected static Texture2D m_T_Null;
 
-    private static SlotDragVisual SlotDragVisualPrefab;
+    protected static SlotDragVisual SlotDragVisualPrefab;
 
+    protected static Texture2D m_BgIcon;
 
     protected virtual void Awake()
     {
@@ -64,6 +72,12 @@ public class BaseSlot :
             SlotDragVisualPrefab = ResourceManager.Instance.LoadResource<GameObject>(
                 "SlotDragVisual", "Prefabs/UI/Slot/SlotDragVisual").GetComponent<SlotDragVisual>();
         }
+        if (!m_BgIcon)
+        {
+            m_BgIcon = ResourceManager.Instance.LoadResource<Texture2D>(
+                "Bgicon", "RPG_MMO_GUI/Texture/Props/BgIcon");
+        }
+
         m_ScreenInstance = PlayerManager.Instance.playerController.screenInstance;
 
         // 빈 슬롯 기본값 설정
@@ -71,10 +85,11 @@ public class BaseSlot :
     }
 
     // 슬롯 초기화 메서드
-    protected virtual void InitializeSlot(SlotType slotType, string inCode)
+    protected virtual void InitializeSlot(SlotType slotType, string inCode, EquipmentType equipmentType)
     {
         m_SlotType = slotType;
         m_InCode = inCode;
+        m_EquipmentType = equipmentType;
     }
 
 

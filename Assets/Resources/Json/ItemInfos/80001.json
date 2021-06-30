@@ -1,1 +1,1 @@
-{"itemCode":"80001","itemName":"보석","itemDescription":"상점에 팔면 비쌀거같다","itemType":0,"itemImagePath":"Image/ItemImage/gem","maxSlotItemCount":5,"itemCoolTime":0.0,"priceToSilver":100,"priceToGold":20,"priceToDiamond":0}
+{"itemCode":"80001","itemName":"보석","itemDescription":"상점에 팔면 비쌀거같다","equipmentType":0,"itemType":0,"itemImagePath":"Image/ItemImage/gem","maxSlotItemCount":5,"itemCoolTime":0.0,"priceToSilver":100,"priceToGold":20,"priceToDiamond":0,"useMaxSlotItemCount":true}

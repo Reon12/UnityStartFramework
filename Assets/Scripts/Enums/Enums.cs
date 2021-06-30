@@ -33,6 +33,8 @@ public enum ItemType
 
 public enum EquipmentType
 {
+	None,
+
 	// 투구
 	Helmet,
 
@@ -49,7 +51,17 @@ public enum EquipmentType
 	Shoes,
 
 	// 무기
-	Weapon
+	Weapon,
+
+	// 반지1
+	Ring1,
+
+	// 반지 2
+	Ring2,
+
+	// 목걸이
+	Jew
+
 
 
 }

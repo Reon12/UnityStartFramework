@@ -1,1 +1,1 @@
-{"itemCode":"90003","itemName":"마나 포션","itemDescription":"마시면 마나가 회복된다","itemType":1,"itemImagePath":"\"Image/ItemImage/mp\"","maxSlotItemCount":1,"itemCoolTime":0.0,"priceToSilver":200,"priceToGold":10,"priceToDiamond":0}
+{"itemCode":"90003","itemName":"마나 포션","itemDescription":"마시면 마나가 회복된다","equipmentType":0,"itemType":1,"itemImagePath":"Image/ItemImage/mp","maxSlotItemCount":1,"itemCoolTime":0.0,"priceToSilver":200,"priceToGold":10,"priceToDiamond":0,"useMaxSlotItemCount":true}

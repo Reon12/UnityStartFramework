@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EquipmentSlot : ItemSlot
 {
+
     protected override void Awake()
     {
         base.Awake();
@@ -12,15 +14,15 @@ public class EquipmentSlot : ItemSlot
 
         m_UseDragDrop = true;
 
+     
         onSlotDragStarted += (dragDropOperation, dragVisual) =>
         {
-
         };
     }
 
-    public void InitializeEquipmentSlot(SlotType slotType, string itemCode)
+    public void InitializeEquipmentSlot(SlotType slotType, string itemCode, EquipmentType equipmentType)
     {
-        base.InitializeSlot(slotType, itemCode);
+        base.InitializeSlot(slotType, itemCode, equipmentType);
 
     }
 }

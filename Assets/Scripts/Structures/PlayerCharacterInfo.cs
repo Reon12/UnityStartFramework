@@ -73,11 +73,17 @@ public struct PlayerCharacterInfo
         inventoryItemInfos[2] = new ItemSlotInfo("90001", 5, 0);
         inventoryItemInfos[3] = new ItemSlotInfo("90001", 6, 0);
         inventoryItemInfos[4] = new ItemSlotInfo("90001", 7, 0);
-        inventoryItemInfos[6] = new ItemSlotInfo("10001", 7, 0);
+        inventoryItemInfos[6] = new ItemSlotInfo("10001", 1, 0);
 
         LeftequipmentItemInfos = new List<EquipmentSlotInfo>();
         for (int i = 0; i < LeftEquipmentSlotCount; ++i)
             LeftequipmentItemInfos.Add(new EquipmentSlotInfo());
+
+        LeftequipmentItemInfos[0] = new EquipmentSlotInfo("10001", EquipmentType.Helmet);
+        LeftequipmentItemInfos[1] = new EquipmentSlotInfo("10002", EquipmentType.Armor);
+        LeftequipmentItemInfos[2] = new EquipmentSlotInfo("10003", EquipmentType.Leg);
+        LeftequipmentItemInfos[3] = new EquipmentSlotInfo("10004", EquipmentType.Glove);
+        LeftequipmentItemInfos[4] = new EquipmentSlotInfo("10005", EquipmentType.Shoes);
 
 
         RightequipmentItemInfos = new List<EquipmentSlotInfo>();
