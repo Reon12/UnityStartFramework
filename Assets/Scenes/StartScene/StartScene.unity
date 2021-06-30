@@ -162,96 +162,44 @@ MonoBehaviour:
     priceToGold: 0
     priceToDiamond: 0
   - itemCode: 90002
-    itemName: "\uB2E8\uB2E8\uD55C \uAC11\uC637"
-    itemDescription: "\uC870\uAE08 \uBB34\uAC70\uC6CC\uBCF4\uC774\uC9C0\uB9CC \uB2E8\uB2E8\uD574\uC9C8\uAC70\uAC19\uB2E4"
-    itemType: 2
-    itemImagePath: Image/ItemImage/armor
+    itemName: "\uCCB4\uB825 \uD3EC\uC158"
+    itemDescription: "\uB9C8\uC2DC\uBA74 \uCCB4\uB825\uC774 \uD68C\uBCF5\uB41C\uB2E4"
+    itemType: 1
+    itemImagePath: '"Image/ItemImage/hp"'
     maxSlotItemCount: 1
     itemCoolTime: 0
     priceToSilver: 100
     priceToGold: 20
     priceToDiamond: 0
   - itemCode: 90003
-    itemName: "\uB3C4\uB07C"
-    itemDescription: "\uC774\uAC74 \uB098\uBB34\uCE90\uB294 \uB3C4\uB07C\uAC00 \uC544\uB2CC
-      \uBAAC\uC2A4\uD130\uC7A1\uB294 \uB3C4\uB07C\uB2E4"
-    itemType: 2
-    itemImagePath: Image/ItemImage/axe
+    itemName: "\uB9C8\uB098 \uD3EC\uC158"
+    itemDescription: "\uB9C8\uC2DC\uBA74 \uB9C8\uB098\uAC00 \uD68C\uBCF5\uB41C\uB2E4"
+    itemType: 1
+    itemImagePath: '"Image/ItemImage/mp"'
     maxSlotItemCount: 1
     itemCoolTime: 0
     priceToSilver: 200
     priceToGold: 10
     priceToDiamond: 0
   - itemCode: 90004
-    itemName: "\uC7A5\uAC11"
-    itemDescription: "\uB450\uAECD\uC9C0\uB9CC \uAC00\uBCBC\uC6B4 \uC7A5\uAC11"
-    itemType: 2
-    itemImagePath: '"Image/ItemImage/gloves"'
+    itemName: "\uB450\uD23C\uD55C \uACE0\uAE30"
+    itemDescription: "\uBA39\uC73C\uBA74 \uB300\uB7C9\uC758 \uCCB4\uB825\uC774 \uD68C\uBCF5\uB41C\uB2E4."
+    itemType: 1
+    itemImagePath: '"Image/ItemImage/Meat"'
     maxSlotItemCount: 1
     itemCoolTime: 0
     priceToSilver: 50
     priceToGold: 5
     priceToDiamond: 10
-  - itemCode: 90005
-    itemName: "\uC2E0\uBC1C"
-    itemDescription: "\uB9E8\uBC1C\uB85C \uAC78\uC5B4\uB2E4\uB2D0\uC21C\uC5C6\uC9C0"
-    itemType: 2
-    itemImagePath: Image/ItemImage/boots
-    maxSlotItemCount: 1
-    itemCoolTime: 0
-    priceToSilver: 100
-    priceToGold: 20
-    priceToDiamond: 0
-  - itemCode: 90006
-    itemName: "\uBCA8\uD2B8"
-    itemDescription: "\uC878\uB77C\uB9E4\uB294 \uD5C8\uB9AC\uB048 \uBAB0\uC544\uCE58\uB294
-      \uD5C8\uB9AC\uCF00\uC778"
-    itemType: 2
-    itemImagePath: '"Image/ItemImage/belts"'
-    maxSlotItemCount: 1
-    itemCoolTime: 0
-    priceToSilver: 60
-    priceToGold: 0
-    priceToDiamond: 5
-  - itemCode: 90007
+  - itemCode: 80001
     itemName: "\uBCF4\uC11D"
     itemDescription: "\uC0C1\uC810\uC5D0 \uD314\uBA74 \uBE44\uC300\uAC70\uAC19\uB2E4"
     itemType: 0
     itemImagePath: Image/ItemImage/gem
     maxSlotItemCount: 5
     itemCoolTime: 0
-    priceToSilver: 0
-    priceToGold: 0
-    priceToDiamond: 0
-  - itemCode: 90008
-    itemName: "\uD5EC\uBA67"
-    itemDescription: "\uBA38\uB9AC\uB97C \uBCF4\uD638\uD574\uC904\uAE4C?"
-    itemType: 2
-    itemImagePath: Image/ItemImage/helmets
-    maxSlotItemCount: 1
-    itemCoolTime: 0
     priceToSilver: 100
-    priceToGold: 10
-    priceToDiamond: 5
-  - itemCode: 90009
-    itemName: "\uCCB4\uB825\uD3EC\uC158"
-    itemDescription: "\uB9C8\uC2DC\uBA74 \uCCB4\uB825\uC774 \uD68C\uBCF5\uB41C\uB2E4"
-    itemType: 1
-    itemImagePath: Image/ItemImage/hp
-    maxSlotItemCount: 50
-    itemCoolTime: 10
-    priceToSilver: 20
-    priceToGold: 0
-    priceToDiamond: 0
-  - itemCode: 90010
-    itemName: "\uB9C8\uB098\uD3EC\uC158"
-    itemDescription: "\uB9C8\uC2DC\uBA74 \uB9C8\uB098\uAC00 \uD68C\uBCF5\uB41C\uB2E4"
-    itemType: 1
-    itemImagePath: Image/ItemImage/mp
-    maxSlotItemCount: 50
-    itemCoolTime: 10
-    priceToSilver: 35
-    priceToGold: 0
+    priceToGold: 20
     priceToDiamond: 0
 --- !u!4 &21889950
 Transform:
@@ -531,6 +479,104 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1006349702
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006349704}
+  - component: {fileID: 1006349703}
+  m_Layer: 0
+  m_Name: EquipItemEditor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1006349703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006349702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bddb1888b971e514c8d78bc7e58488bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _EquipitemInfos:
+  - itemCode: 10001
+    itemName: "\uD5EC\uBA67"
+    itemDescription: "\uBA38\uB9AC\uB97C \uBC29\uC5B4\uD574\uC900\uB2E4"
+    equipmentType: 0
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/helmets"'
+    priceToSilver: 0
+    priceToGold: 0
+    priceToDiamond: 0
+  - itemCode: 10002
+    itemName: "\uAC11\uC637"
+    itemDescription: "\uB2E8\uB2E8\uD55C \uAC11\uC637\uC774\uB2E4"
+    equipmentType: 1
+    itemType: 2
+    itemImagePath: 
+    priceToSilver: 0
+    priceToGold: 0
+    priceToDiamond: 0
+  - itemCode: 10003
+    itemName: "\uD558\uC758"
+    itemDescription: "\uD558\uC774!"
+    equipmentType: 2
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/pants"'
+    priceToSilver: 0
+    priceToGold: 0
+    priceToDiamond: 0
+  - itemCode: 10004
+    itemName: "\uC7A5\uAC11"
+    itemDescription: "\uC7A5\uAC11\uC774"
+    equipmentType: 3
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/gloves"'
+    priceToSilver: 0
+    priceToGold: 0
+    priceToDiamond: 0
+  - itemCode: 10005
+    itemName: "\uB3C4\uB07C"
+    itemDescription: 
+    equipmentType: 4
+    itemType: 2
+    itemImagePath: '"Image/ItemImage/boots"'
+    priceToSilver: 0
+    priceToGold: 0
+    priceToDiamond: 0
+  - itemCode: 10006
+    itemName: "\uB3C4\uB07C"
+    itemDescription: "\uBB34\uAE30"
+    equipmentType: 5
+    itemType: 2
+    itemImagePath: Assets/Resources/Image/ItemImage/axe.png
+    priceToSilver: 0
+    priceToGold: 0
+    priceToDiamond: 0
+--- !u!4 &1006349704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006349702}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 202.23514, y: 153.78572, z: -11.980225}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1395904759
 PrefabInstance:

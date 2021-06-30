@@ -16,7 +16,8 @@ public struct PlayerCharacterInfo
     // 소지중인 아이템 정보
     public List<ItemSlotInfo> inventoryItemInfos;
 
-    public List<EquipmentSlotInfo> equipmentItemInfos;
+    public List<EquipmentSlotInfo> LeftequipmentItemInfos;
+    public List<EquipmentSlotInfo> RightequipmentItemInfos;
 
     public ItemInfo itemInfos;
 
@@ -67,14 +68,20 @@ public struct PlayerCharacterInfo
         for (int i = 0; i < InventorySlotCount; ++i)
             inventoryItemInfos.Add(new ItemSlotInfo());
 
-        inventoryItemInfos[5] = new ItemSlotInfo("90003", 5, 0);
-        inventoryItemInfos[7] = new ItemSlotInfo("90002", 1, 0);
         inventoryItemInfos[0] = new ItemSlotInfo("90001", 3, 0);
         inventoryItemInfos[1] = new ItemSlotInfo("90001", 4, 0);
         inventoryItemInfos[2] = new ItemSlotInfo("90001", 5, 0);
         inventoryItemInfos[3] = new ItemSlotInfo("90001", 6, 0);
         inventoryItemInfos[4] = new ItemSlotInfo("90001", 7, 0);
-        inventoryItemInfos[9] = new ItemSlotInfo("90009", 7, 0);
+        inventoryItemInfos[6] = new ItemSlotInfo("10001", 7, 0);
 
+        LeftequipmentItemInfos = new List<EquipmentSlotInfo>();
+        for (int i = 0; i < LeftEquipmentSlotCount; ++i)
+            LeftequipmentItemInfos.Add(new EquipmentSlotInfo());
+
+
+        RightequipmentItemInfos = new List<EquipmentSlotInfo>();
+        for (int i = 0; i < RightEquipmentSlotCount; ++i)
+            RightequipmentItemInfos.Add(new EquipmentSlotInfo());
     }
 }

@@ -9,6 +9,8 @@ public class ItemSlot : BaseSlot
 
     public ItemInfo itemInfo => _ItemInfo;
 
+  
+
     protected override void InitializeSlot(SlotType slotType, string inCode)
     {
         base.InitializeSlot(slotType, inCode);
@@ -33,13 +35,18 @@ public class ItemSlot : BaseSlot
             bool fileNotFound;
             ItemInfo itemInfo =
                 ResourceManager.Instance.LoadJson<ItemInfo>("ItemInfos", $"{itemCode}.json", out fileNotFound);
+
             // 파일을 읽어 오지 못했다면
             if (fileNotFound)
             {
                 _ItemInfo = new ItemInfo();
+
             }
             else
+            {
                 _ItemInfo = itemInfo;
+            }
+                
         }
     }
 

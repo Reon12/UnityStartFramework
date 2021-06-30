@@ -8,7 +8,14 @@ public class EquipmentSlot : ItemSlot
     {
         base.Awake();
 
+        m_SlotType = SlotType.EquipItemSlot;
 
+        m_UseDragDrop = true;
+
+        onSlotDragStarted += (dragDropOperation, dragVisual) =>
+        {
+
+        };
     }
 
     public void InitializeEquipmentSlot(SlotType slotType, string itemCode)

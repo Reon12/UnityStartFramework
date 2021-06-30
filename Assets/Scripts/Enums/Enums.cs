@@ -46,7 +46,11 @@ public enum EquipmentType
 	Glove,
 
 	// 신발
-	Shoes
+	Shoes,
+
+	// 무기
+	Weapon
+
 
 }
 

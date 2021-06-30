@@ -46,7 +46,7 @@ public class EquipmentWnd : ClosableWnd
 
             _LeftItemSlots.Add(newLeftItemSlots);
 
-            newLeftItemSlots.InitializeEquipmentSlot(SlotType.EquipItemSlot, playerCharacterInfo.equipmentItemInfos[i].itemCode);
+            newLeftItemSlots.InitializeEquipmentSlot(SlotType.EquipItemSlot, playerCharacterInfo.LeftequipmentItemInfos[i].itemCode);
         }
         for (int i = 0; i < playerCharacterInfo.RightEquipmentSlotCount; ++i)
         {
@@ -54,7 +54,7 @@ public class EquipmentWnd : ClosableWnd
 
             _RightItemSlots.Add(newRightItemSlots);
 
-            newRightItemSlots.InitializeEquipmentSlot(SlotType.EquipItemSlot, playerCharacterInfo.equipmentItemInfos[i].itemCode);
+            newRightItemSlots.InitializeEquipmentSlot(SlotType.EquipItemSlot, playerCharacterInfo.RightequipmentItemInfos[i].itemCode);
 
         }
     }

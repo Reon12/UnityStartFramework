@@ -1,1 +1,1 @@
-{"itemCode":"90002","itemName":"단단한 갑옷","itemDescription":"조금 무거워보이지만 단단해질거같다","itemType":2,"itemImagePath":"Image/ItemImage/armor","maxSlotItemCount":1,"itemCoolTime":0.0,"priceToSilver":100,"priceToGold":20,"priceToDiamond":0}
+{"itemCode":"90002","itemName":"체력 포션","itemDescription":"마시면 체력이 회복된다","itemType":1,"itemImagePath":"\"Image/ItemImage/hp\"","maxSlotItemCount":1,"itemCoolTime":0.0,"priceToSilver":100,"priceToGold":20,"priceToDiamond":0}

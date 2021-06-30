@@ -1,1 +1,1 @@
-{"itemCode":"90004","itemName":"장갑","itemDescription":"두껍지만 가벼운 장갑","itemType":2,"itemImagePath":"\"Image/ItemImage/gloves\"","maxSlotItemCount":1,"itemCoolTime":0.0,"priceToSilver":50,"priceToGold":5,"priceToDiamond":10}
+{"itemCode":"90004","itemName":"두툼한 고기","itemDescription":"먹으면 대량의 체력이 회복된다.","itemType":1,"itemImagePath":"\"Image/ItemImage/Meat\"","maxSlotItemCount":1,"itemCoolTime":0.0,"priceToSilver":50,"priceToGold":5,"priceToDiamond":10}
