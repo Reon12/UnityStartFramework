@@ -29,7 +29,7 @@ public class BaseSlot :
     protected EquipmentType m_EquipmentType;
 
     public Image slotImage => _Image_Slot;
-    public Image EquipSlotImage => _Image_EquipmentSlot;
+    public Image equipmentSlotImage => _Image_EquipmentSlot;
 
     public TextMeshProUGUI countText => _TMP_Count;
 

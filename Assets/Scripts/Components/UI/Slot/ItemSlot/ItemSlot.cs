@@ -45,7 +45,7 @@ public class ItemSlot : BaseSlot
             {
                 _ItemInfo = itemInfo;
             }
-            Debug.Log(_ItemInfo.equipmentType);
+
         }
     }
 
@@ -53,7 +53,6 @@ public class ItemSlot : BaseSlot
     public void UpdateItemImage()
     {
         Texture2D itemImage;
-        Texture2D equipSlotImage;
         // 아이템 정보가 비어있다면 투명한 이미지로 설정합니다.
         if (_ItemInfo.IsEmpty)
             itemImage = m_T_Null;
