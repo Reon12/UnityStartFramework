@@ -31,17 +31,22 @@ public class EquipmentSlot : ItemSlot
         {
             SlotHintTextures = new Dictionary<EquipmentType, Texture2D>();
         }
+
+        // 각 슬롯의 EquipmentType 을 저장할 리스트
         List<EquipmentType> equipmentTypeToString = new List<EquipmentType>();
+
+        var slothintValue = ResourceManager.Instance.LoadResource<Texture2D>(equipmentType.ToString(), $"RPG_MMO_GUI/Texture/Inventory/{equipmentType}");
 
         equipmentTypeToString.Add(equipmentType);
 
 
-        foreach(var equip in equipmentTypeToString)
-        {
-            SlotHintTextures.Add(equip, ResourceManager.Instance.LoadResource<Texture2D>(equip.ToString(), $"RPG_MMO_GUI/Texture/Inventory/{equip.ToString()}"));
-        }
+        SlotHintTextures.Add(equipmentType, ResourceManager.Instance.LoadResource<Texture2D>(equipmentType.ToString(), $"RPG_MMO_GUI/Texture/Inventory/{equipmentType}"));
+
+        Debug.Log(equipmentType);
 
         equipmentSlotImage.sprite = Sprite.Create(SlotHintTextures[equipmentType], new Rect(0.0f, 0.0f, SlotHintTextures[equipmentType].width, SlotHintTextures[equipmentType].height), Vector2.one);
+
+
 
         //SlotHintTextures.Add(equipmentType, ResourceManager.Instance.LoadResource<Texture2D>(equipmentTypeTostring, $"RPG_MMO_GUI/Texture/Inventory/{equipmentTypeTostring}"));
 
