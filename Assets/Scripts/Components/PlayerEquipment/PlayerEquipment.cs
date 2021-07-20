@@ -10,6 +10,9 @@ public sealed class PlayerEquipment : MonoBehaviour
     {
         _Wnd_EquipmentWndPrefab = ResourceManager.Instance.LoadResource<GameObject>("Wnd_EquipmentPrefab",
             "Prefabs/UI/EquipmentWnd/EquipmentWnd").GetComponent<EquipmentWnd>();
+
+
+
     }
 
     public void ToggleEquipmentWnd()
@@ -20,6 +23,7 @@ public sealed class PlayerEquipment : MonoBehaviour
 
     }
 
+    
     public void OpenEquipmentWnd(bool usePrevPosition = true)
     {
         if (playerequipmentWnd != null) return;

@@ -83,9 +83,9 @@ public class InventorySlot : ItemSlot
                         bool isSameItem =
                             playerCharacterInfo.inventoryItemInfos[inventorySlot.inventoryItemSlotIndex] == playerCharacterInfo.inventoryItemInfos[inventoryItemSlotIndex];
                         if (isSameItem)
-                        playerController.playerInventory.MergeItem(this, inventorySlot);
+                            playerController.playerInventory.MergeItem(this, inventorySlot);
                         else
-                        playerController.playerInventory.SwapItem(this, inventorySlot);
+                            playerController.playerInventory.SwapItem(this, inventorySlot);
                     }
                     // 퀵슬롯 일 경우
                     else if (overlappedSlot.slotType == SlotType.QuickSlot)
@@ -96,13 +96,24 @@ public class InventorySlot : ItemSlot
 
                         slotImage.color = new Color(1.0f, 1.0f, 1.0f);
                     }
+                    else if (overlappedSlot.slotType == SlotType.EquipItemSlot)
+                    {
+                        EquipmentSlot equipmentSlot = overlappedComponent as EquipmentSlot;
+
+                        slotImage.color = new Color(1.0f, 1.0f, 1.0f);
+
+                        // 아이템 타입이 장비 아이템이 아니라면 실행 x
+                        if (itemInfo.itemType != ItemType.Equipment || itemInfo.equipmentType != equipmentSlot.equipmentType) return;
+                        equipmentSlot.equipmentSlotImage.sprite = Sprite.Create(m_BgIcon, new Rect(0.0f, 0.0f, m_BgIcon.width, m_BgIcon.height), Vector2.one);
+                        equipmentSlot.UpdateEquipmentSlot();
+                    }
 
                 }
 
             };
         };
-        
     }
+
 
     public void InitializeInventoryItemSlot(SlotType slotType, string itemCode, int itemSlotIndex)
     {

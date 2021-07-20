@@ -20,6 +20,31 @@ public class EquipmentSlot : ItemSlot
 
         onSlotDragStarted += (dragDropOperation, dragVisual) =>
         {
+
+            dragVisual.SetDragImageFromSprite(slotImage.sprite);
+            slotImage.color = new Color(0.3f, 0.3f, 0.3f);
+
+            dragDropOperation.onDragFinished += () =>
+            {
+                foreach (var overlappedComponent in dragDropOperation.overlappedComponents)
+                {
+                    BaseSlot overlappedSlot = overlappedComponent as BaseSlot;
+                    if (overlappedSlot == null) continue;
+
+                    InventorySlot inventorySlot = overlappedComponent as InventorySlot;
+
+                    GamePlayerController playerController = (PlayerManager.Instance.playerController) as GamePlayerController;
+                    ref PlayerCharacterInfo playerCharacterInfo = ref playerController.playerCharacterInfo;
+
+                    if (overlappedSlot.slotType == SlotType.InventoryItemSlot)
+                    {
+                        
+                    }
+
+                    slotImage.color = new Color(1.0f, 1.0f, 1.0f);
+                }
+
+            };
         };
     }
 
@@ -30,35 +55,27 @@ public class EquipmentSlot : ItemSlot
         if (SlotHintTextures == null)
         {
             SlotHintTextures = new Dictionary<EquipmentType, Texture2D>();
+
+            SlotHintTextures.Add(EquipmentType.Helmet, ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Helmet.ToString(), "RPG_MMO_GUI/Texture/Inventory/Helmet"));
+            SlotHintTextures.Add(EquipmentType.Armor, ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Armor.ToString(), "RPG_MMO_GUI/Texture/Inventory/Armor"));
+            SlotHintTextures.Add(EquipmentType.Leg, ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Leg.ToString(), "RPG_MMO_GUI/Texture/Inventory/Leg"));
+            SlotHintTextures.Add(EquipmentType.Glove, ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Glove.ToString(), "RPG_MMO_GUI/Texture/Inventory/Glove"));
+            SlotHintTextures.Add(EquipmentType.Shoes, ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Shoes.ToString(), "RPG_MMO_GUI/Texture/Inventory/Shoes"));
+            SlotHintTextures.Add(EquipmentType.Weapon, ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Weapon.ToString(), "RPG_MMO_GUI/Texture/Inventory/Weapon"));
+            SlotHintTextures.Add(EquipmentType.Ring1, ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Ring1.ToString(), "RPG_MMO_GUI/Texture/Inventory/Ring1"));
+            SlotHintTextures.Add(EquipmentType.Ring2, ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Ring2.ToString(), "RPG_MMO_GUI/Texture/Inventory/Ring2"));
+            SlotHintTextures.Add(EquipmentType.Jew, ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Jew.ToString(), "RPG_MMO_GUI/Texture/Inventory/Jew"));
+
         }
 
-        // 각 슬롯의 EquipmentType 을 저장할 리스트
-        List<EquipmentType> equipmentTypeToString = new List<EquipmentType>();
-
-        var slothintValue = ResourceManager.Instance.LoadResource<Texture2D>(equipmentType.ToString(), $"RPG_MMO_GUI/Texture/Inventory/{equipmentType}");
-
-        equipmentTypeToString.Add(equipmentType);
-
-
-        SlotHintTextures.Add(equipmentType, ResourceManager.Instance.LoadResource<Texture2D>(equipmentType.ToString(), $"RPG_MMO_GUI/Texture/Inventory/{equipmentType}"));
-
-        Debug.Log(equipmentType);
 
         equipmentSlotImage.sprite = Sprite.Create(SlotHintTextures[equipmentType], new Rect(0.0f, 0.0f, SlotHintTextures[equipmentType].width, SlotHintTextures[equipmentType].height), Vector2.one);
 
+    }
 
-
-        //SlotHintTextures.Add(equipmentType, ResourceManager.Instance.LoadResource<Texture2D>(equipmentTypeTostring, $"RPG_MMO_GUI/Texture/Inventory/{equipmentTypeTostring}"));
-
-        //SlotHintTextures.Add(EquipmentType.Helmet,  ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Helmet.ToString(), "RPG_MMO_GUI/Texture/Inventory/Helmet"));
-        //SlotHintTextures.Add(EquipmentType.Armor,   ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Armor.ToString(), "RPG_MMO_GUI/Texture/Inventory/Armor"));
-        //SlotHintTextures.Add(EquipmentType.Leg,     ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Leg.ToString(), "RPG_MMO_GUI/Texture/Inventory/Leg"));
-        //SlotHintTextures.Add(EquipmentType.Glove,   ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Glove.ToString(), "RPG_MMO_GUI/Texture/Inventory/Glove"));
-        //SlotHintTextures.Add(EquipmentType.Shoes,   ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Shoes.ToString(), "RPG_MMO_GUI/Texture/Inventory/Shoes"));
-        //SlotHintTextures.Add(EquipmentType.Weapon,  ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Weapon.ToString(), "RPG_MMO_GUI/Texture/Inventory/Weapon"));
-        //SlotHintTextures.Add(EquipmentType.Ring1,   ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Ring1.ToString(), "RPG_MMO_GUI/Texture/Inventory/Ring1"));
-        //SlotHintTextures.Add(EquipmentType.Ring2,   ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Ring2.ToString(), "RPG_MMO_GUI/Texture/Inventory/Ring2"));
-        //SlotHintTextures.Add(EquipmentType.Jew,     ResourceManager.Instance.LoadResource<Texture2D>(EquipmentType.Jew.ToString(), "RPG_MMO_GUI/Texture/Inventory/Jew"));
+    // 장비슬롯 업데이트
+    public void UpdateEquipmentSlot()
+    {
 
     }
 }
