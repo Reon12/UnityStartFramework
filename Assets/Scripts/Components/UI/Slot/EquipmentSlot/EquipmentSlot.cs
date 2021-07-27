@@ -28,17 +28,16 @@ public class EquipmentSlot : ItemSlot
             {
                 foreach (var overlappedComponent in dragDropOperation.overlappedComponents)
                 {
-                    BaseSlot overlappedSlot = overlappedComponent as BaseSlot;
-                    if (overlappedSlot == null) continue;
+                    BaseSlot otherSlot = overlappedComponent as BaseSlot;
+                    if (otherSlot == null) continue;
 
                     InventorySlot inventorySlot = overlappedComponent as InventorySlot;
 
                     GamePlayerController playerController = (PlayerManager.Instance.playerController) as GamePlayerController;
                     ref PlayerCharacterInfo playerCharacterInfo = ref playerController.playerCharacterInfo;
 
-                    if (overlappedSlot.slotType == SlotType.InventoryItemSlot)
+                    if (otherSlot.slotType == SlotType.InventoryItemSlot)
                     {
-                        
                     }
 
                     slotImage.color = new Color(1.0f, 1.0f, 1.0f);
@@ -76,6 +75,7 @@ public class EquipmentSlot : ItemSlot
     // 장비슬롯 업데이트
     public void UpdateEquipmentSlot()
     {
+        UpdateItemImage();
 
     }
 }
